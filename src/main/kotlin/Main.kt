@@ -1,10 +1,4 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
-}
 /*
 Grundlagen der Programmierung
 Abschlussaufgabe
@@ -113,23 +107,50 @@ o 1x Vitamine: erhöhen den Schadenswert für einen Helden dauerhaft um 10%.
 
 // Taktiker                 // Peter Quill (Star-Lord) : Blast / Ablenken / Jet-Pack / Doppelschuss
 //                             800 ( 2300 Rüstung / Schnelligkeit : 140 % / Schwäche : Nahkampf )
-// Nahkampf                 // Gamora : Tritt / Kampfkunstattacke / Wurfwaffe / Kombikampf
-//                             3200 ( 400 Rüstung / Schnelligkeit : 135 % / Schwäche : Giftspritzer )
-// Nahkampf                 // Drax : Hieb / Messerattacke / Waffen-zerstören / Spürsinn
+// Nahkämpfer               // Gamora : Tritt / Kampfkunstattacke / Wurfwaffe / Kombikampf
+//                             3200 ( 400 Rüstung / Schnelligkeit : 135 % / Schwäche : Taktiker )
+// Nahkämpfer               // Drax : Hieb / Messerattacke / Tritt / Spürsinn
 //                             4500 ( 550 Rüstung / Schnelligkeit : 100 % / Schwäche : Taktiker )
-// Technikexperte           // Rocket : Präzisionsschüsse / Hacking / Modifizierung / Bombe
+// Ingenieur                // Rocket : Präzisionsschüsse / Hacking / Modifizierung / Bombe
 //                             400  ( 1400 Rüstung / Schnelligkeit : 145 % / Schwäche : Nahkampf )
-// Übernatürlich            // Groot : Formwandel / Schutz / Heilung-der-Natur / Kontrolle
-//                             5000 ( 5000 Rüstung / Schnelligkeit : 80 % / Schwäche : Feuerkämpfer )
+// Plantoid                 // Groot : Formwandel / Schutz / Heilung-der-Natur / Pfeile
+//                             5000 ( 5000 Rüstung / Schnelligkeit : 80 % / Schwäche : Nahkämpfer )
 
 //                  Rucksack : 5 x Groot's Vitaltrank : Alle Kategorien : heilt um die Hälfte seiner Lebenspunkte
 //                           / 1 x Elementar Kristalle : Alle Kategorien : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
 //                           / 1 x Star-Lord's Mixtape : Taktiker : verdoppelt den Schaden der nächsten Attacke
-//                           / 1 x Ingenieurshandbuch : Technikexperte : verdoppelt den Schaden der nächsten Attacke
+//                           / 1 x Ingenieurshandbuch : Ingenieur : verdoppelt den Schaden der nächsten Attacke
 //                           / 1 x Kampfhandschuhe : Nahkämpfer : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
 
+var AttackenListe : List<Attacke_Heros> = listOf<Attacke_Heros>(
+    Attacke_Heros("Blast", 500),
+    Attacke_Heros("Jet-Pack", 500),
+    Attacke_Heros("Doppelschuss", 500),
+    Attacke_Heros("Tritt", 500),
+    Attacke_Heros("Kampfkunstattacke", 500),
+    Attacke_Heros("Wurfwaffe", 500),
+    Attacke_Heros("Kombikampf", 500),
+    Attacke_Heros("Hieb", 500),
+    Attacke_Heros("Messerattacke", 500),
+    Attacke_Heros("Präzisionsschüsse", 500),
+    Attacke_Heros("Hacking", 500),
+    Attacke_Heros("Modifizierung", 500),
+    Attacke_Heros("Bombe", 500),
+    Attacke_Heros("Pfeile", 500),
+
+)
+var nahkämpfer1 : Hero_Nahkämpfer = Hero_Nahkämpfer("Gemora", 3200, 400, 400,135, "Taktiker", )
+var nahkämpfer2 : Hero_Nahkämpfer = Hero_Nahkämpfer("Drax", 4500, 550,550, 100, "Taktiker", )
+var ingenieur : Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 1400, 1400,145, "Nahkämpfer", )
+var plantoid : Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000,80, "Nahkämpfer", )
+var taktiker : Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 2300, 2300,140, "Nahkämpfer", )
+
+var listeDerHelden = listOf(nahkämpfer1, nahkämpfer2, ingenieur, plantoid, taktiker)
 
 /*
+
+
+
 Informationen zum Endgegner:
 
 // Übernatürlich
@@ -187,8 +208,42 @@ als sie auf Xandar auf Ronan treffen.
 */
 
 // Taktiker                 // Sakaarans : Schuss / Doppelschuss / Messerwurf
+//                             900 ( 1500 Rüstung / Schnelligkeit : 100 % / Schwäche : Nahkampf )
 
-// Nahkampf                 // Nebula : Tritt / Messerattacke / Hieb
+// Nahkämpfer                 // Nebula : Tritt / Messerattacke / Hieb
+//                             1400 ( 2000 Rüstung / Schnelligkeit : 90 % / Schwäche : Übernatürlicher )
 
-// Übernatürlich            // Ronan the Accuser : Hammer-Schock-Welle / Packen / Korath the Pursuer wird gerufen / Tritt / Hammerhieb / Schuss
+// Übernatürlicher            // Ronan the Accuser : Hammer-Schock-Welle / Packen / Korath the Pursuer wird gerufen / Tritt / Hammerhieb / Schuss
+//                             3500 ( 2500 Rüstung / Schnelligkeit : 120 % / Schwäche : Taktiker )
 // Taktiker                 // Korath the Pursuer : Schuss / Doppelschuss / Tritt / Heilungsblitz
+//                             1000 ( 1500 Rüstung / Schnelligkeit : 110 % / Schwäche : Nahkampf )
+
+var sakaarans1 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Führer", 1000, 1500, 1500, 100, "Nahkämpfer")
+var sakaarans2 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Helfer", 800, 1500, 1500, 100, "Nahkämpfer")
+var sakaarans3 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Untertan", 900, 1500, 1500,100, "Nahkämpfer")
+var sakaarans4 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Kämpfer", 900, 1500,1500, 100, "Nahkämpfer")
+
+var nebula : Enemy_Nahkämpfer = Enemy_Nahkämpfer("Nebula", 1400, 2000,2000, 90, "Übernatürlicher")
+
+var endgegner_ronan : Enemy_Übernatürlicher = Enemy_Übernatürlicher("Ronan the Accuser", 3500, 2500,2500, 120, "Taktiker")
+var helfer_Endgegner : Enemy_Taktiker = Enemy_Taktiker("Korath the Pursuer", 1000, 1500, 1500,110, "Nahkampf")
+
+
+var sakaaransListe : List<Enemy> = listOf(sakaarans1,sakaarans2,sakaarans3,sakaarans4)
+
+fun main(){
+    listeDerHelden[1].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[2].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[3].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
+
+
+}
