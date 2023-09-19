@@ -1,3 +1,3 @@
-class Attacke_Heros(var name: String, var schaden: Int) {
+class Attacke_Heros(var name: String, var healOrdamage: Int,) {
 }
 

@@ -5,6 +5,10 @@ class Hero_Nahkämpfer(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attacke1: Pair<String, Int>,
-) : Hero (name, lp, armor, armorReduction, speed, weakness, attacke1){
+    attacke1 : Attacke_Heros,
+    attacke2 : Attacke_Heros,
+    attacke3 : Attacke_Heros,
+    attacke4 : Attacke_Heros,
+    gestorben : Boolean
+) : Hero (name, lp, armor, armorReduction, speed, weakness, attacke1, attacke2, attacke3, attacke4, gestorben){
 }

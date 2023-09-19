@@ -122,11 +122,13 @@ o 1x Vitamine: erhöhen den Schadenswert für einen Helden dauerhaft um 10%.
 //                           / 1 x Ingenieurshandbuch : Ingenieur : verdoppelt den Schaden der nächsten Attacke
 //                           / 1 x Kampfhandschuhe : Nahkämpfer : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
 
-var AttackenListe : List<Attacke_Heros> = listOf<Attacke_Heros>(
+var AttackenListe : List<Attacke_Heros> = listOf(
     Attacke_Heros("Blast", 500),
+    Attacke_Heros("Ablenken", 0),
     Attacke_Heros("Jet-Pack", 500),
     Attacke_Heros("Doppelschuss", 500),
     Attacke_Heros("Tritt", 500),
+    Attacke_Heros("Spürsinn", 0),
     Attacke_Heros("Kampfkunstattacke", 500),
     Attacke_Heros("Wurfwaffe", 500),
     Attacke_Heros("Kombikampf", 500),
@@ -137,16 +139,19 @@ var AttackenListe : List<Attacke_Heros> = listOf<Attacke_Heros>(
     Attacke_Heros("Modifizierung", 500),
     Attacke_Heros("Bombe", 500),
     Attacke_Heros("Pfeile", 500),
-
+    Attacke_Heros("Formwandel", 0),
+    Attacke_Heros("Schutz", 0),
+    Attacke_Heros("Heilung der Natur", 400),
 )
-var nahkämpfer1 : Hero_Nahkämpfer = Hero_Nahkämpfer("Gemora", 3200, 400, 400,135, "Taktiker", )
-var nahkämpfer2 : Hero_Nahkämpfer = Hero_Nahkämpfer("Drax", 4500, 550,550, 100, "Taktiker", )
-var ingenieur : Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 1400, 1400,145, "Nahkämpfer", )
-var plantoid : Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000,80, "Nahkämpfer", )
-var taktiker : Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 2300, 2300,140, "Nahkämpfer", )
+var gestorbeneHelden : MutableList<Hero> = mutableListOf()
 
-var listeDerHelden = listOf(nahkämpfer1, nahkämpfer2, ingenieur, plantoid, taktiker)
+var nahkämpfer1 : Hero_Nahkämpfer = Hero_Nahkämpfer("Gemora", 3200, 400, 400,135, "Taktiker", AttackenListe[4], AttackenListe[6], AttackenListe[7], AttackenListe[8], false)
+var nahkämpfer2 : Hero_Nahkämpfer = Hero_Nahkämpfer("Drax", 4500, 550,550, 100, "Taktiker", AttackenListe[9], AttackenListe[10], AttackenListe[4], AttackenListe[5], false)
+var ingenieur : Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 1400, 1400,145, "Nahkämpfer", AttackenListe[11], AttackenListe[12], AttackenListe[13], AttackenListe[14],false)
+var plantoid : Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000,80, "Nahkämpfer", AttackenListe[15], AttackenListe[16], AttackenListe[17], AttackenListe[18],false)
+var taktiker : Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 2300, 2300,140, "Nahkämpfer", AttackenListe[0], AttackenListe[1], AttackenListe[2], AttackenListe[3],false)
 
+var listeDerHelden = mutableListOf(nahkämpfer1, nahkämpfer2, ingenieur, plantoid, taktiker)
 /*
 
 
@@ -231,19 +236,9 @@ var helfer_Endgegner : Enemy_Taktiker = Enemy_Taktiker("Korath the Pursuer", 100
 
 var sakaaransListe : List<Enemy> = listOf(sakaarans1,sakaarans2,sakaarans3,sakaarans4)
 
-fun main(){
-    listeDerHelden[1].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[2].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[3].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-    listeDerHelden[0].attackEnemy(endgegner_ronan, 500)
-
-
+var attackeListEnemy : List<Attacke_Enemys> = listOf(
+    Attacke_Enemys("Hammer-Schock-Welle", 300)
+)
+fun main() {
 }
+
