@@ -1,3 +1,8 @@
+import Beutel.Beutel
+import Enemy.Attacke_Enemys
+import Enemy.Enemy_Taktiker
+import Enemy.Enemy_Übernatürlicher
+import Heros.*
 
 /*
 Grundlagen der Programmierung
@@ -116,11 +121,6 @@ o 1x Vitamine: erhöhen den Schadenswert für einen Helden dauerhaft um 10%.
 // Plantoid                 // Groot : Formwandel / Schutz / Heilung-der-Natur / Pfeile
 //                             5000 ( 5000 Rüstung / Schnelligkeit : 80 % / Schwäche : Nahkämpfer )
 
-//                  Rucksack : 5 x Groot's Vitaltrank : Alle Kategorien : heilt um die Hälfte seiner Lebenspunkte
-//                           / 1 x Elementar Kristalle : Alle Kategorien : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
-//                           / 1 x Star-Lord's Mixtape : Taktiker : verdoppelt den Schaden der nächsten Attacke
-//                           / 1 x Ingenieurshandbuch : Ingenieur : verdoppelt den Schaden der nächsten Attacke
-//                           / 1 x Kampfhandschuhe : Nahkämpfer : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
 
 var AttackenListe : List<Attacke_Heros> = listOf(
     Attacke_Heros("Blast", 500),
@@ -145,27 +145,33 @@ var AttackenListe : List<Attacke_Heros> = listOf(
 )
 var gestorbeneHelden : MutableList<Hero> = mutableListOf()
 
-var nahkämpfer1 : Hero_Nahkämpfer = Hero_Nahkämpfer("Gemora", 3200, 400, 400,135, "Taktiker", AttackenListe[4], AttackenListe[6], AttackenListe[7], AttackenListe[8], false)
-var nahkämpfer2 : Hero_Nahkämpfer = Hero_Nahkämpfer("Drax", 4500, 550,550, 100, "Taktiker", AttackenListe[9], AttackenListe[10], AttackenListe[4], AttackenListe[5], false)
-var ingenieur : Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 1400, 1400,145, "Nahkämpfer", AttackenListe[11], AttackenListe[12], AttackenListe[13], AttackenListe[14],false)
-var plantoid : Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000,80, "Nahkämpfer", AttackenListe[15], AttackenListe[16], AttackenListe[17], AttackenListe[18],false)
-var taktiker : Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 2300, 2300,140, "Nahkämpfer", AttackenListe[0], AttackenListe[1], AttackenListe[2], AttackenListe[3],false)
+var gamora : Hero_Nahkämpfer = Hero_Nahkämpfer("Gamora", 3200, 3200, 400, 400,135, "Taktiker", AttackenListe[4], AttackenListe[6], AttackenListe[7], AttackenListe[8])
+var drax : Hero_Nahkämpfer = Hero_Nahkämpfer("Drax", 4500, 4500,550,550, 100, "Taktiker", AttackenListe[9], AttackenListe[10], AttackenListe[4], AttackenListe[5])
+var rocket : Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 400,1400, 1400,145, "Nahkämpfer", AttackenListe[11], AttackenListe[12], AttackenListe[13], AttackenListe[14])
+var groot : Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000,5000, 5000,80, "Nahkämpfer", AttackenListe[15], AttackenListe[16], AttackenListe[17], AttackenListe[18])
+var peter : Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 800,2300, 2300,140, "Nahkämpfer", AttackenListe[0], AttackenListe[1], AttackenListe[2], AttackenListe[3])
 
-var listeDerHelden = mutableListOf(nahkämpfer1, nahkämpfer2, ingenieur, plantoid, taktiker)
+var listeDerHelden = mutableListOf(gamora, drax, rocket, groot, peter)
+var taktikerListe : MutableList<Hero> = mutableListOf(peter)
+var ingenieurListe : MutableList<Hero> = mutableListOf(rocket)
+var nahkaempferListe : MutableList<Hero> = mutableListOf(gamora, drax)
+
+//                  Rucksack : 5 x Groot's Vitaltrank : Alle Kategorien : heilt um die Hälfte seiner Lebenspunkte
+//                           / 1 x Elementar Kristalle : Alle Kategorien : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
+//                           / 1 x Star-Lord's Mixtape : Taktiker : verdoppelt den Schaden der nächsten Attacke
+//                           / 1 x Ingenieurshandbuch : Ingenieur : verdoppelt den Schaden der nächsten Attacke
+//                           / 1 x Kampfhandschuhe : Nahkämpfer : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
+
+var rucksack : List<Beutel> = listOf(
+    Beutel("Groot's Vitalttrank", 2, listeDerHelden),
+    Beutel("Elementar Kristalle", 10, listeDerHelden),
+    Beutel("Star-Lord's Mixtape", 2, taktikerListe),
+    Beutel("Ingeneurshandbuch", 2, ingenieurListe),
+    Beutel("Kampfhandschuhe", 10, nahkaempferListe)
+    )
+
 /*
 
-
-
-Informationen zum Endgegner:
-
-// Übernatürlich
-● Dieser kann beispielsweise ein Dunkler Magier oder ein Drache sein.
-//
-● Auch er hat gewisse Eigenschaften: (Hohe) HP und sechs mögliche Aktionen.
-● Besonderheiten zu seinen Aktionen:
-// Hammer-Schock-Welle
-o Eine Aktion (z.B. ein Feueratem) verursacht Flächenschaden. D.h. dass diese Aktion
-alle Helden gleichzeitig trifft und allen Helden Schaden zufügt.
 // Packen
 o Eine Aktion ist ein Fluch oder Ähnliches. Dieser soll maximal einen der Helden
 betreffen und von diesem Helden solange die HP um 10% pro Runde verringeren, bis
@@ -212,33 +218,44 @@ Korath the Pursuer: Korath ist ein Söldner im Dienst von Ronan und tritt gegen 
 als sie auf Xandar auf Ronan treffen.
 */
 
-// Taktiker                 // Sakaarans : Schuss / Doppelschuss / Messerwurf
-//                             900 ( 1500 Rüstung / Schnelligkeit : 100 % / Schwäche : Nahkampf )
-
-// Nahkämpfer                 // Nebula : Tritt / Messerattacke / Hieb
-//                             1400 ( 2000 Rüstung / Schnelligkeit : 90 % / Schwäche : Übernatürlicher )
-
 // Übernatürlicher            // Ronan the Accuser : Hammer-Schock-Welle / Packen / Korath the Pursuer wird gerufen / Tritt / Hammerhieb / Schuss
 //                             3500 ( 2500 Rüstung / Schnelligkeit : 120 % / Schwäche : Taktiker )
 // Taktiker                 // Korath the Pursuer : Schuss / Doppelschuss / Tritt / Heilungsblitz
 //                             1000 ( 1500 Rüstung / Schnelligkeit : 110 % / Schwäche : Nahkampf )
 
-var sakaarans1 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Führer", 1000, 1500, 1500, 100, "Nahkämpfer")
-var sakaarans2 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Helfer", 800, 1500, 1500, 100, "Nahkämpfer")
-var sakaarans3 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Untertan", 900, 1500, 1500,100, "Nahkämpfer")
-var sakaarans4 : Enemy_Taktiker = Enemy_Taktiker("Sakaaran Kämpfer", 900, 1500,1500, 100, "Nahkämpfer")
-
-var nebula : Enemy_Nahkämpfer = Enemy_Nahkämpfer("Nebula", 1400, 2000,2000, 90, "Übernatürlicher")
-
-var endgegner_ronan : Enemy_Übernatürlicher = Enemy_Übernatürlicher("Ronan the Accuser", 3500, 2500,2500, 120, "Taktiker")
-var helfer_Endgegner : Enemy_Taktiker = Enemy_Taktiker("Korath the Pursuer", 1000, 1500, 1500,110, "Nahkampf")
-
-
-var sakaaransListe : List<Enemy> = listOf(sakaarans1,sakaarans2,sakaarans3,sakaarans4)
-
-var attackeListEnemy : List<Attacke_Enemys> = listOf(
-    Attacke_Enemys("Hammer-Schock-Welle", 300)
+var attacken_endgegner_ronan : MutableList<Attacke_Enemys> = mutableListOf(
+    Attacke_Enemys("Hammer-Schock-Welle", 300),
+    Attacke_Enemys("Packen", 10),
+    Attacke_Enemys("Beschwören", null),
+    Attacke_Enemys("Tritt", 440),
+    Attacke_Enemys("Hammerhieb", 700),
+    Attacke_Enemys("Schuss", 350),
 )
+var attacken_helfer : MutableList<Attacke_Enemys> = mutableListOf(
+    Attacke_Enemys("Tritt", 440),
+    Attacke_Enemys("Schuss", 350),
+    Attacke_Enemys("Doppelschuss", 350),
+    Attacke_Enemys("Heilungsblitz", 350),
+)
+
+var endgegner_ronan : Enemy_Übernatürlicher = Enemy_Übernatürlicher("Ronan the Accuser", 3500, 3500, 2500,2500, 120, "Taktiker", attacken_endgegner_ronan, )
+var helfer_Endgegner : Enemy_Taktiker = Enemy_Taktiker("Korath the Pursuer", 1000, 3500, 1500, 1500,110, "Nahkampf", attacken_helfer)
+
+
 fun main() {
+    while (listeDerHelden.isNotEmpty()) {
+        val gestorben = listeDerHelden.filter { it.lp <= 0 }
+        for (helden in gestorben) {
+            gestorbeneHelden.add(helden)
+            listeDerHelden.remove(helden)
+            println("${helden.name} ist gestorben")
+        }
+        if (listeDerHelden.isNotEmpty()) {
+            //hier attacke
+        } else {
+            println("Alle deine Helden sind im Kampf gestorben")
+        }
+    }
 }
+
 

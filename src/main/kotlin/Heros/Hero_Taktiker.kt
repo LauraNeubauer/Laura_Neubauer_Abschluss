@@ -1,6 +1,9 @@
+package Heros
+
 class Hero_Taktiker(
     name : String,
     lp : Int,
+    lpReduction : Int,
     armor : Int,
     armorReduction : Int,
     speed : Int,
@@ -9,6 +12,5 @@ class Hero_Taktiker(
     attacke2 : Attacke_Heros,
     attacke3 : Attacke_Heros,
     attacke4 : Attacke_Heros,
-    gestorben : Boolean
-) : Hero (name, lp, armor, armorReduction, speed, weakness, attacke1, attacke2, attacke3, attacke4, gestorben){
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacke1, attacke2, attacke3, attacke4){
 }
