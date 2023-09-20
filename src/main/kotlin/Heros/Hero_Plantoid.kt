@@ -12,7 +12,7 @@ class Hero_Plantoid(
 ) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks) {
 
     fun healHero(hero: Hero) {
-        val needHealing: Boolean = hero.lp <= (hero.lpReduction - 400)
+        val needHealing: Boolean = hero.lp <= (hero.lpStandart - 400)
         var healing: Int = this.attacks[3].healOrdamage!!
         if (needHealing == true) {
             hero.lp + healing
