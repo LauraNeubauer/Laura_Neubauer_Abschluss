@@ -1,6 +1,6 @@
 package Heros
 
-class Hero_Taktiker(
+class Hero_Nahkaempfer(
     name: String,
     lp: Int,
     lpReduction: Int,
@@ -9,5 +9,4 @@ class Hero_Taktiker(
     speed: Int,
     weakness: String,
     attacks: MutableList<Attacke_Heros>
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks) {
-}
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks)

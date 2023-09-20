@@ -1,5 +1,5 @@
 package Heros
 
-class Attacke_Heros(var name: String, var healOrdamage: Int,) {
+class Attacke_Heros(var name: String, var healOrdamage: Int?) {
 }
 
