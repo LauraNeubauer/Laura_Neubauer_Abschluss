@@ -1,7 +1,5 @@
 package Enemy
 
-import Heros.Hero
-
 class Enemy_Taktiker(
     name: String,
     lp: Int,
@@ -10,8 +8,12 @@ class Enemy_Taktiker(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attaken: MutableList<Attacke_Enemys> = mutableListOf()
-) : Enemy(name, lp, lpStandart, armor, armorReduction, speed, weakness, attaken) {
+    attaken: MutableList<Attacke_Enemys>,
+    helferBeschworen: Boolean,
+    helferLebt: Boolean,
+    inFight: MutableList<Enemy>,
+    tot: MutableList<Enemy>
+) : Enemy(name, lp, lpStandart, armor, armorReduction, speed, weakness, attaken, helferBeschworen, helferLebt, inFight, tot) {
     fun healEndgegner(enemy: Enemy) {
         val needHealing: Boolean = enemy.lp <= (enemy.lpStandart - 400)
         var healing: Int = enemy.attaken[3].healOrDamage!!

@@ -1,5 +1,6 @@
 import Beutel.Beutel
 import Enemy.Attacke_Enemys
+import Enemy.Enemy
 import Enemy.Enemy_Taktiker
 import Enemy.Enemy_Übernatürlicher
 import Heros.*
@@ -155,12 +156,12 @@ var nahkaempferListe: MutableList<Hero> = mutableListOf(gamora, drax)
 //  1 x Ingenieurshandbuch : Ingenieur : verdoppelt den Schaden der nächsten Attacke
 //  1 x Kampfhandschuhe : Nahkämpfer : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
 
-var rucksack: List<Beutel> = listOf(
-    Beutel("Groot's Vitalttrank", 2, listeDerHelden),
-    Beutel("Elementar Kristalle", 10, listeDerHelden),
-    Beutel("Star-Lord's Mixtape", 2, taktikerListe),
-    Beutel("Ingeneurshandbuch", 2, ingenieurListe),
-    Beutel("Kampfhandschuhe", 10, nahkaempferListe)
+var rucksack: MutableList<Beutel> = mutableListOf(
+    Beutel("Groot's Vitalttrank", 2,4, listeDerHelden),
+    Beutel("Elementar Kristalle", 10, 4,listeDerHelden),
+    Beutel("Star-Lord's Mixtape", 2, 4,taktikerListe),
+    Beutel("Ingeneurshandbuch", 2, 4,ingenieurListe),
+    Beutel("Kampfhandschuhe", 10, 4,nahkaempferListe)
 )
 
 /*
@@ -226,24 +227,55 @@ var attacken_helfer: MutableList<Attacke_Enemys> = mutableListOf(
     Attacke_Enemys("Heilungsblitz", 350),
 )
 
+var inFight : MutableList<Enemy> = mutableListOf()
+var toteEndgegner : MutableList<Enemy> = mutableListOf()
+
 var endgegner_ronan: Enemy_Übernatürlicher =
-    Enemy_Übernatürlicher("Ronan the Accuser", 3500, 3500, 2500, 2500, 120, "Taktiker", attacken_endgegner_ronan)
+    Enemy_Übernatürlicher("Ronan the Accuser", 3500, 3500, 2500, 2500, 120, "Taktiker", attacken_endgegner_ronan, false, true, inFight, toteEndgegner)
 var helfer_Endgegner: Enemy_Taktiker =
-    Enemy_Taktiker("Korath the Pursuer", 1000, 3500, 1500, 1500, 110, "Nahkampf", attacken_helfer)
+    Enemy_Taktiker("Korath the Pursuer", 1000, 3500, 1500, 1500, 110, "Nahkampf", attacken_helfer, false, true, inFight, toteEndgegner)
 
 
-fun main() {
-    while (listeDerHelden.isNotEmpty()) {
-        val gestorben = listeDerHelden.filter { it.lp <= 0 }
-        for (helden in gestorben) {
-            gestorbeneHelden.add(helden)
-            listeDerHelden.remove(helden)
-            println("${helden.name} ist gestorben")
-        }
-        if (listeDerHelden.isNotEmpty()) {
-            //hier attacke
-        } else {
-            println("Alle deine Helden sind im Kampf gestorben")
-        }
+fun main(){
+    println()
+    val game = GamePlay(listeDerHelden, rucksack)
+    var continueBattle = true
+    endgegner_ronan.EndgegnerinFight(endgegner_ronan)
+    for (held in listeDerHelden){
+        while (continueBattle && listeDerHelden.isNotEmpty()) {
+            println("Was möchtest du tun?")
+            println("1. Kämpfen und Attacke wählen")
+            println("2. Den Beutel nutzen")
+            val spielerAktion = readln()
+            when (spielerAktion) {
+                "1" -> {
+                    val schnellsterHeld : Hero? = listeDerHelden.maxByOrNull { it.speed }
+                    println("Du kämpfst zuerst mit ${schnellsterHeld!!.name}")
+                    println("Welche Attacke willst du ausführen?")
+                    println(listeDerHelden[0].attacks.toList())
+                    val gestorben = listeDerHelden.filter { it.lp <= 0 }
+                    for (helden in gestorben) {
+                        gestorbeneHelden.add(helden)
+                        listeDerHelden.remove(helden)
+                        println("${helden.name} ist gestorben")
+                    }
+                }
+                "2" -> {
+                    println("Du öffnest deinen Beutel und siehst, was darin ist.")
+                    for (i in 1..5) {
+                        println("Runde $i:")
+                        game.zugriffAufBeutel()
+                    }
+                }
+                "3" -> {
+                    println("Du gibst auf und verlässt den Kampf.")
+                    break
+                }
+                else -> {
+                    println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
+                }
+            }
     }
-}
+}}
+
+
