@@ -98,7 +98,6 @@ fun main() {
                 println("Was möchtest du tun?")
                 println("1. Kämpfen und Attacke wählen")
                 println("2. Den Beutel nutzen")
-                println("3. Aufgeben und den Kampf verlassen")
                 val spielerAktion = readln()
 
                 when (spielerAktion) {
@@ -136,14 +135,6 @@ fun main() {
                     }
                     "2" -> {
                         println("Du öffnest deinen Beutel und siehst, was darin ist.")
-                        for (i in 1..5) {
-                            println("Runde $i:")
-                            game.zugriffAufBeutel()
-                        }
-                    }
-                    "3" -> {
-                        println("Du gibst auf und verlässt den Kampf.")
-                        continueBattle = false
                     }
                     else -> {
                         println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
