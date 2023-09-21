@@ -98,33 +98,39 @@ fun main() {
                 println("Was möchtest du tun?")
                 println("1. Kämpfen und Attacke wählen")
                 println("2. Den Beutel nutzen")
-                val spielerAktion = readln()
+                var spielerAktion: Int? = null
 
+                while (spielerAktion == null || spielerAktion < 0 || spielerAktion > 2) {
+                    val input = readln()
+
+                    try {
+                        spielerAktion = input.toInt()
+
+                        if (spielerAktion < 0 || spielerAktion > 2) {
+                            println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
+                        }
+                    } catch (e: NumberFormatException) {
+                        println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
+                    }
+                }
                 when (spielerAktion) {
-                    "1" -> {
+                    1 -> {
                         println("Du kämpfst mit ${held.name}")
                         println("Welche Attacke willst du ausführen?")
+
                         for ((index, attack) in held.attacks.withIndex()) {
                             println("$index. ${attack.name}")
                         }
-                        val attackChoice = readln()
-                        when (attackChoice) {
-                            "0" -> {
-                                held.attackEnemy(endgegner_ronan, held.attacks[0])
-                            }
-                            "1" -> {
-                                held.attackEnemy(endgegner_ronan, held.attacks[1])
-                            }
-                            "2" -> {
-                                held.attackEnemy(endgegner_ronan, held.attacks[1])
-                            }
-                            "3" -> {
-                                held.attackEnemy(endgegner_ronan, held.attacks[1])
-                            }
-                            else -> {
+                        var attackChoice: Int? = null
+                        while (attackChoice == null || attackChoice < 0 || attackChoice >= held.attacks.size) {
+                            val input = readln()
+                            attackChoice = input.toIntOrNull()
+                            if (attackChoice == null || attackChoice < 0 || attackChoice >= held.attacks.size) {
                                 println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
                             }
                         }
+                        held.attackEnemy(endgegner_ronan, held.attacks[attackChoice])
+
                         val gestorben = listeDerHelden.filter { it.lp <= 0 }
                         for (helden in gestorben) {
                             gestorbeneHelden.add(helden)
@@ -133,9 +139,15 @@ fun main() {
                         }
                         gezogeneHelden.add(held)
                     }
-                    "2" -> {
+
+                    2 -> {
                         println("Du öffnest deinen Beutel und siehst, was darin ist.")
+                        for (i in 1..5) {
+                            println("Runde $i:")
+                            game.zugriffAufBeutel()
+                        }
                     }
+
                     else -> {
                         println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
                     }

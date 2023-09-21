@@ -29,6 +29,7 @@ open class Enemy(
     fun EndgegnerinFight(endgegner : Enemy){
         println("Während ihr euch auf Ronans Versteck zubewegt, bemerkt ihr düstere Zeichen am Himmel. Gewitterwolken brauen sich zusammen, " +
                 "als ob das Universum selbst euren Kampf vorausahnt. Die Welt um euch herum wird ruhig, als würden die Sterne selbst auf den Ausgang dieser Schlacht warten.")
+        println()
         inFight.add(this)
     }
 
