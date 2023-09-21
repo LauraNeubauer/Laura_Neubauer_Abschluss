@@ -1,4 +1,5 @@
 package Heros
+
 import Beutel.Beutel
 import Enemy.Enemy
 
@@ -10,19 +11,9 @@ open class Hero(
     var armorReduction: Int,
     var speed: Int,
     var weakness: String,
-    var attacks: MutableList<Attacke_Heros>
+    var attacks: MutableList<Attacke_Heros>,
+    var hasUsedBeutel: Boolean
 ) {
-
-    private var hasUsedBeutelThisRound: Boolean = false
-
-    open fun useBeutel(beutel: Beutel) {
-        if (hasUsedBeutelThisRound) {
-            println("$name hat den Beutel bereits in dieser Runde verwendet.")
-            return
-        }
-        beutel.use()
-        hasUsedBeutelThisRound = true
-    }
     fun attackEnemy(enemy: Enemy, attacke: Attacke_Heros) {
         if (attacke.healOrdamage!! > enemy.lp) {
             enemy.lp = 0

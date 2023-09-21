@@ -13,3 +13,9 @@ fun StoryLine(){
             "Mit diesen Worten fühlt ihr euch gestärkt und bereit für das " +
             "Unausweichliche.")
 }
+
+fun StoryLine2(){
+    println("Ronan, in seiner fanatischen Entschlossenheit und getrieben von einem unstillbaren Durst nach Macht, " +
+            "erhebt sich über das Schlachtfeld. Seine mächtige Waffe, der Cosmi-Rod, glüht vor übernatürlicher Energie, " +
+            "und er lässt einen vernichtenden Energiestrahl auf die Guardians niederregnen.")
+}

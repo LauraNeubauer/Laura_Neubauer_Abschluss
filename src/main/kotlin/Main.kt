@@ -17,7 +17,7 @@ var attackenDrax: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Hieb", 500),
     Attacke_Heros("Messerattacke", 500),
     Attacke_Heros("Tritt", 500),
-    Attacke_Heros("Spürsinn", null)
+    Attacke_Heros("Round-House-Kick", 600)
 )
 var attackenRocket: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Präzisionsschüsse", 500),
@@ -26,35 +26,29 @@ var attackenRocket: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Bombe", 500),
 )
 var attackenGroot: MutableList<Attacke_Heros> = mutableListOf(
-    Attacke_Heros("Pfeile", 500),
-    Attacke_Heros("Formwandel", null),
-    Attacke_Heros("Schutz", null),
-    Attacke_Heros("Heilung der Natur", 400),
+    Attacke_Heros("Astpfeile", 500),
+    Attacke_Heros("Peitschenäste", 400),
+    Attacke_Heros("Durchbohren", 550),
+    Attacke_Heros("Würgen", 400),
 )
 var attackenPeter: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Blast", 500),
-    Attacke_Heros("Ablenken", null),
+    Attacke_Heros("Manipulieren", 300),
     Attacke_Heros("Jet-Pack", 500),
     Attacke_Heros("Doppelschuss", 500)
 )
 
-var gamora: Hero_Nahkaempfer = Hero_Nahkaempfer("Gamora", 3200, 3200, 400, 400, 135, "Taktiker", attackenGamora)
-var drax: Hero_Nahkaempfer = Hero_Nahkaempfer("Drax", 4500, 4500, 550, 550, 100, "Taktiker", attackenDrax)
-var rocket: Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 400, 1400, 1400, 145, "Nahkämpfer", attackenRocket)
-var groot: Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000, 5000, 80, "Nahkämpfer", attackenGroot)
-var peter: Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, "Nahkämpfer", attackenPeter)
+var gamora: Hero_Nahkaempfer = Hero_Nahkaempfer("Gamora", 3200, 3200, 400, 400, 135, "Taktiker", attackenGamora, false)
+var drax: Hero_Nahkaempfer = Hero_Nahkaempfer("Drax", 4500, 4500, 550, 550, 100, "Taktiker", attackenDrax, false)
+var rocket: Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 400, 1400, 1400, 145, "Nahkämpfer", attackenRocket, false)
+var groot: Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000, 5000, 80, "Nahkämpfer", attackenGroot, false)
+var peter: Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, "Nahkämpfer", attackenPeter, false)
 
 var listeDerHelden = mutableListOf(gamora, drax, rocket, groot, peter)
-var taktikerListe: MutableList<Hero> = mutableListOf(peter)
-var ingenieurListe: MutableList<Hero> = mutableListOf(rocket)
-var nahkaempferListe: MutableList<Hero> = mutableListOf(gamora, drax)
 
 var rucksack: MutableList<Beutel> = mutableListOf(
-    Beutel("Groot's Vitalttrank", 2,4, listeDerHelden),
-    Beutel("Elementar Kristalle", 10, 4,listeDerHelden),
-    Beutel("Star-Lord's Mixtape", 2, 4,taktikerListe),
-    Beutel("Ingeneurshandbuch", 2, 4,ingenieurListe),
-    Beutel("Kampfhandschuhe", 10, 4,nahkaempferListe)
+    Beutel("Groot's Vitalttrank", 2, 5),
+    Beutel("Elementar Kristalle", 10, 4),
 )
 
 var attacken_endgegner_ronan: MutableList<Attacke_Enemys> = mutableListOf(
@@ -78,12 +72,57 @@ var toteEndgegner : MutableList<Enemy> = mutableListOf()
 var endgegner_ronan: Enemy_Übernatürlicher = Enemy_Übernatürlicher("Ronan the Accuser", 3500, 3500, 2500, 2500, 120, "Taktiker", attacken_endgegner_ronan, false, true, inFight, toteEndgegner)
 var helfer_Endgegner: Enemy_Taktiker = Enemy_Taktiker("Korath the Pursuer", 1000, 3500, 1500, 1500, 110, "Nahkampf", attacken_helfer, false, true, inFight, toteEndgegner)
 
-fun main() {
+fun useBeutel(hero: Hero) {
+    if (hero.hasUsedBeutel == true) {
+        println("${hero.name} hat den Beutel bereits in dieser Runde verwendet.")
+    } else if (rucksack.isEmpty()) {
+        println("Der Rucksack ist leer! ")
+    } else {
+        for ((index, beutel) in rucksack.withIndex()) {
+            println("${index}. ${beutel.name}")
+        }
+        val beutelChoice : Int = readln().toInt()
+        if (beutelChoice in (0..1)) {
+            when (beutelChoice) {
+                0 -> {
+                    println("${hero.name} hat ${hero.lp} Lebenspunkte")
+                    println("${hero.name} trinkt ${rucksack[0].name}!")
+                    println("${hero.name} Lebenspunkte werden um die Hälfte seiner ursprünglichen Lebenspunkte geheilt")
+                    if (hero.lp < (hero.lpStandart / 2)) {
+                        hero.lp + (hero.lpStandart / rucksack[0].value)
+                    } else {
+                        val fullLp = hero.lpStandart
+                        hero.lp = fullLp
+                    }
+                    println("${hero.name} hat nun ${hero.lp} Lebenspunkte!")
+                    println()
+                    rucksack[beutelChoice].amount - 1
+                }
+                1 -> {
+                    //erhöhen den Schadenswert für einen Helden dauerhaft um 10%
+                    println("${hero.name} nutzt ${rucksack[1].name}")
+                    println("${hero.name}'s Attacken werden stärker um 10%")
+                    println()
+                    for (heroAttack in hero.attacks) {
+                        val plus = (heroAttack.healOrdamage!! / 100) * 10
+                        print("${heroAttack.name}'s Schaden: ${heroAttack.healOrdamage} steigt auf ")
+                        heroAttack.healOrdamage = heroAttack.healOrdamage!! + plus
+                        println("${heroAttack.healOrdamage}")
+                    }
+                    println()
+                }
+            }
+            hero.hasUsedBeutel = true
+        } else {
+            println("Ungültige Auswahl.")
+        }
+    }
+}
+
+fun FirstRound() {
     println()
     val gezogeneHelden = mutableListOf<Hero>()
-    val game = GamePlay(listeDerHelden, rucksack)
     var continueBattle = true
-    endgegner_ronan.EndgegnerinFight(endgegner_ronan)
     for (held in listeDerHelden) {
         while (continueBattle && listeDerHelden.isNotEmpty()) {
             for (held in listeDerHelden.sortedByDescending { it.speed }) {
@@ -115,7 +154,6 @@ fun main() {
                     1 -> {
                         println("Du kämpfst mit ${held.name}")
                         println("Welche Attacke willst du ausführen?")
-
                         for ((index, attack) in held.attacks.withIndex()) {
                             println("$index. ${attack.name}")
                         }
@@ -136,13 +174,11 @@ fun main() {
                             println("${helden.name} ist gestorben")
                         }
                         gezogeneHelden.add(held)
+                        continueBattle = false
                     }
                     2 -> {
                         println("Du öffnest deinen Beutel und siehst, was darin ist.")
-                        for (i in 1..5) {
-                            println("Runde $i:")
-                            game.zugriffAufBeutel()
-                        }
+                        useBeutel(held)
                     }
                     else -> {
                         println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
@@ -151,4 +187,33 @@ fun main() {
             }
         }
     }
+}
+
+fun firstRoundEnemy(){
+    StoryLine2()
+    println()
+    var randomAttack = (0..5).random()
+    if (randomAttack == 5 && endgegner_ronan.helferLebt == true && endgegner_ronan.helferBeschworen == false){
+        endgegner_ronan.HelferBeschwören(helfer_Endgegner)
+    } else if (randomAttack == 0) {
+        endgegner_ronan.HammerSchockWelle(listeDerHelden)
+    } else if (randomAttack == 1) {
+
+
+
+
+
+        //////////////////////////
+
+
+
+
+
+    }
+}
+
+fun main(){
+    endgegner_ronan.EndgegnerinFight(endgegner_ronan)
+    FirstRound()
+    firstRoundEnemy()
 }

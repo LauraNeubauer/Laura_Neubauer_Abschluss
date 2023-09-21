@@ -8,5 +8,6 @@ class Hero_Nahkaempfer(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attacks: MutableList<Attacke_Heros>
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks)
+    attacks: MutableList<Attacke_Heros>,
+    hasUsedBeutel: Boolean
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel, )
