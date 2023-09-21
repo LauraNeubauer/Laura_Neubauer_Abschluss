@@ -10,10 +10,10 @@ class Enemy_Taktiker(
     weakness: String,
     attaken: MutableList<Attacke_Enemys>,
     helferBeschworen: Boolean,
-    helferLebt: Boolean,
+    helperAlive: Boolean,
     inFight: MutableList<Enemy>,
     tot: MutableList<Enemy>
-) : Enemy(name, lp, lpStandart, armor, armorReduction, speed, weakness, attaken, helferBeschworen, helferLebt, inFight, tot) {
+) : Enemy(name, lp, lpStandart, armor, armorReduction, speed, weakness, attaken, helferBeschworen, helperAlive, inFight, tot) {
     fun healEndgegner(enemy: Enemy) {
         val needHealing: Boolean = enemy.lp <= (enemy.lpStandart - 400)
         var healing: Int = enemy.attaken[3].healOrDamage!!

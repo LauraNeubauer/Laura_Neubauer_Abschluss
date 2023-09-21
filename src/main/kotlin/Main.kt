@@ -93,13 +93,11 @@ fun main() {
                 if (held in gezogeneHelden) {
                     continue
                 }
-
                 println("Es ist ${held.name}'s Zug.")
                 println("Was möchtest du tun?")
                 println("1. Kämpfen und Attacke wählen")
                 println("2. Den Beutel nutzen")
                 var spielerAktion: Int? = null
-
                 while (spielerAktion == null || spielerAktion < 0 || spielerAktion > 2) {
                     val input = readln()
 
@@ -124,7 +122,7 @@ fun main() {
                         var attackChoice: Int? = null
                         while (attackChoice == null || attackChoice < 0 || attackChoice >= held.attacks.size) {
                             val input = readln()
-                            attackChoice = input.toIntOrNull()
+                            attackChoice = input.toInt()
                             if (attackChoice == null || attackChoice < 0 || attackChoice >= held.attacks.size) {
                                 println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
                             }
@@ -139,7 +137,6 @@ fun main() {
                         }
                         gezogeneHelden.add(held)
                     }
-
                     2 -> {
                         println("Du öffnest deinen Beutel und siehst, was darin ist.")
                         for (i in 1..5) {
@@ -147,7 +144,6 @@ fun main() {
                             game.zugriffAufBeutel()
                         }
                     }
-
                     else -> {
                         println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
                     }
