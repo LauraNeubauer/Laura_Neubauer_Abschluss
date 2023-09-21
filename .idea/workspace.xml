@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="5.0">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/GamePlay.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Test.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Utilitys.kt" afterDir="false" />
+    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="6.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Beutel/Beutel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Beutel/Beutel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy_Taktiker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy_Taktiker.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy_Übernatürlicher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy_Übernatürlicher.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Heros/Attacke_Heros.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Heros/Attacke_Heros.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Heros/Hero.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Heros/Hero.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Test.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695225793985</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="6.0">
+      <option name="closed" value="true" />
+      <created>1695289723083</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1695289723083</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -123,6 +126,7 @@
     <MESSAGE value="3.0" />
     <MESSAGE value="4.0" />
     <MESSAGE value="5.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="5.0" />
+    <MESSAGE value="6.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.0" />
   </component>
 </project>
