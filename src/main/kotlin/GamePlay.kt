@@ -1,10 +1,9 @@
-import Beutel.Beutel
+import Beutel.Bag
 import Heros.Hero
-import kotlin.random.Random
 
 class GamePlay(
     private val players: List<Hero>,
-    private val rucksack: MutableList<Beutel>
+    private val rucksack: MutableList<Bag>
 ) {
     private var currentPlayerIndex: Int = 0
 }

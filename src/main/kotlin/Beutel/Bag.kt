@@ -1,8 +1,6 @@
 package Beutel
 
-import Heros.Hero
-
-class Beutel(
+class Bag(
     var name: String,
     var value: Int,
     var amount: Int

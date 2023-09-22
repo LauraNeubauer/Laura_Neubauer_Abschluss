@@ -1,6 +1,6 @@
 package Enemy
 
-class Enemy_Übernatürlicher(
+class EnemyBossRonan(
     name: String,
     lp: Int,
     lpStandart: Int,
@@ -8,7 +8,7 @@ class Enemy_Übernatürlicher(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attaken: MutableList<Attacke_Enemys> = mutableListOf(),
+    attaken: MutableList<AttacksEnemys> = mutableListOf(),
     helferBeschworen: Boolean,
     helferLebt: Boolean,
     inFight: MutableList<Enemy>,

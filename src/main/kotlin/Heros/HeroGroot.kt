@@ -1,6 +1,6 @@
 package Heros
 
-class Hero_Plantoid(
+class HeroGroot(
     name: String,
     lp: Int,
     lpReduction: Int,
@@ -8,7 +8,7 @@ class Hero_Plantoid(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attacks: MutableList<Attacke_Heros>,
+    attacks: MutableList<AttacksHeros>,
     hasUsedBeutel: Boolean
 ) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel) {
 

@@ -1,6 +1,6 @@
 package Enemy
 
-class Enemy_Taktiker(
+class EnemyKorath(
     name: String,
     lp: Int,
     lpStandart: Int,
@@ -8,7 +8,7 @@ class Enemy_Taktiker(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attaken: MutableList<Attacke_Enemys>,
+    attaken: MutableList<AttacksEnemys>,
     helferBeschworen: Boolean,
     helperAlive: Boolean,
     inFight: MutableList<Enemy>,

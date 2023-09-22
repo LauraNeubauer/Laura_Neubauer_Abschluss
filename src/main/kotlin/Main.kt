@@ -1,84 +1,84 @@
-import Beutel.Beutel
-import Enemy.Attacke_Enemys
+import Beutel.Bag
+import Enemy.AttacksEnemys
 import Enemy.Enemy
-import Enemy.Enemy_Taktiker
-import Enemy.Enemy_Übernatürlicher
+import Enemy.EnemyKorath
+import Enemy.EnemyBossRonan
 import Heros.*
 
 private var deadHeros: MutableList<Hero> = mutableListOf()
 
-private var attacksGamora: MutableList<Attacke_Heros> = mutableListOf(
-    Attacke_Heros("Tritt", 500),
-    Attacke_Heros("Kampfkunstattacke", 500),
-    Attacke_Heros("Wurfwaffe", 500),
-    Attacke_Heros("Kombikampf", 500),
+private var attacksGamora: MutableList<AttacksHeros> = mutableListOf(
+    AttacksHeros("Tritt", 500),
+    AttacksHeros("Kampfkunstattacke", 500),
+    AttacksHeros("Wurfwaffe", 500),
+    AttacksHeros("Kombikampf", 500),
 )
-private var attacksDrax: MutableList<Attacke_Heros> = mutableListOf(
-    Attacke_Heros("Hieb", 500),
-    Attacke_Heros("Messerattacke", 500),
-    Attacke_Heros("Tritt", 500),
-    Attacke_Heros("Round-House-Kick", 600)
+private var attacksDrax: MutableList<AttacksHeros> = mutableListOf(
+    AttacksHeros("Hieb", 500),
+    AttacksHeros("Messerattacke", 500),
+    AttacksHeros("Tritt", 500),
+    AttacksHeros("Round-House-Kick", 600)
 )
-private var attacksRocket: MutableList<Attacke_Heros> = mutableListOf(
-    Attacke_Heros("Präzisionsschüsse", 500),
-    Attacke_Heros("Hacking", 500),
-    Attacke_Heros("Modifizierung", 500),
-    Attacke_Heros("Bombe", 500),
+private var attacksRocket: MutableList<AttacksHeros> = mutableListOf(
+    AttacksHeros("Präzisionsschüsse", 500),
+    AttacksHeros("Hacking", 500),
+    AttacksHeros("Modifizierung", 500),
+    AttacksHeros("Bombe", 500),
 )
-private var attacksGroot: MutableList<Attacke_Heros> = mutableListOf(
-    Attacke_Heros("Astpfeile", 500),
-    Attacke_Heros("Peitschenäste", 400),
-    Attacke_Heros("Durchbohren", 550),
-    Attacke_Heros("Würgen", 400),
+private var attacksGroot: MutableList<AttacksHeros> = mutableListOf(
+    AttacksHeros("Astpfeile", 500),
+    AttacksHeros("Peitschenäste", 400),
+    AttacksHeros("Durchbohren", 550),
+    AttacksHeros("Würgen", 400),
 )
-private var attacksPeter: MutableList<Attacke_Heros> = mutableListOf(
-    Attacke_Heros("Blast", 500),
-    Attacke_Heros("Manipulieren", 300),
-    Attacke_Heros("Jet-Pack", 500),
-    Attacke_Heros("Doppelschuss", 500)
-)
-
-var gamora: Hero_Nahkaempfer = Hero_Nahkaempfer("Gamora", 3200, 3200, 400, 400, 135, "Taktiker", attacksGamora, false)
-var drax: Hero_Nahkaempfer = Hero_Nahkaempfer("Drax", 4500, 4500, 550, 550, 100, "Taktiker", attacksDrax, false)
-var rocket: Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 400, 1400, 1400, 145, "Nahkämpfer", attacksRocket, false)
-var groot: Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000, 5000, 80, "Nahkämpfer", attacksGroot, false)
-var peter: Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, "Nahkämpfer", attacksPeter, false)
-
-var listeDerHelden = mutableListOf(gamora, drax, rocket, groot, peter)
-
-var rucksack: MutableList<Beutel> = mutableListOf(
-    Beutel("Groot's Vitalttrank", 2, 5),
-    Beutel("Elementar Kristalle", 10, 4),
+private var attacksPeter: MutableList<AttacksHeros> = mutableListOf(
+    AttacksHeros("Blast", 500),
+    AttacksHeros("Manipulieren", 300),
+    AttacksHeros("Jet-Pack", 500),
+    AttacksHeros("Doppelschuss", 500)
 )
 
-var attacken_endgegner_ronan: MutableList<Attacke_Enemys> = mutableListOf(
-    Attacke_Enemys("Hammer-Schock-Welle", 300),
-    Attacke_Enemys("Packen", 10),
-    Attacke_Enemys("Beschwören", null),
-    Attacke_Enemys("Tritt", 440),
-    Attacke_Enemys("Hammerhieb", 700),
-    Attacke_Enemys("Schuss", 350),
+var gamora: HeroDraxAndGamora = HeroDraxAndGamora("Gamora", 3200, 3200, 400, 400, 135, "Taktiker", attacksGamora, false)
+var drax: HeroDraxAndGamora = HeroDraxAndGamora("Drax", 4500, 4500, 550, 550, 100, "Taktiker", attacksDrax, false)
+var rocket: HeroRocket = HeroRocket("Rocket", 400, 400, 1400, 1400, 145, "Nahkämpfer", attacksRocket, false)
+var groot: HeroGroot = HeroGroot("Groot", 5000, 5000, 5000, 5000, 80, "Nahkämpfer", attacksGroot, false)
+var peter: HeroPeter = HeroPeter("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, "Nahkämpfer", attacksPeter, false)
+
+var listHeros = mutableListOf(gamora, drax, rocket, groot, peter)
+
+var bag: MutableList<Bag> = mutableListOf(
+    Bag("Groot's Vitalttrank", 2, 5),
+    Bag("Elementar Kristalle", 10, 4),
 )
-var attacken_helfer: MutableList<Attacke_Enemys> = mutableListOf(
-    Attacke_Enemys("Tritt", 440),
-    Attacke_Enemys("Schuss", 350),
-    Attacke_Enemys("Doppelschuss", 350),
-    Attacke_Enemys("Heilungsblitz", 350),
+
+var attacksBossRonan: MutableList<AttacksEnemys> = mutableListOf(
+    AttacksEnemys("Hammer-Schock-Welle", 300),
+    AttacksEnemys("Packen", 10),
+    AttacksEnemys("Beschwören", null),
+    AttacksEnemys("Tritt", 440),
+    AttacksEnemys("Hammerhieb", 700),
+    AttacksEnemys("Schuss", 350),
+)
+var attacksKorath: MutableList<AttacksEnemys> = mutableListOf(
+    AttacksEnemys("Tritt", 440),
+    AttacksEnemys("Schuss", 350),
+    AttacksEnemys("Doppelschuss", 350),
+    AttacksEnemys("Heilungsblitz", 350),
 )
 
 var inFight : MutableList<Enemy> = mutableListOf()
-var toteEndgegner : MutableList<Enemy> = mutableListOf()
+var deadEnemys : MutableList<Enemy> = mutableListOf()
 
-var endgegner_ronan: Enemy_Übernatürlicher = Enemy_Übernatürlicher("Ronan the Accuser", 3500, 3500, 2500, 2500, 120, "Taktiker", attacken_endgegner_ronan, false, true, inFight, toteEndgegner)
-var helfer_Endgegner: Enemy_Taktiker = Enemy_Taktiker("Korath the Pursuer", 1000, 3500, 1500, 1500, 110, "Nahkampf", attacken_helfer, false, true, inFight, toteEndgegner)
+var bossRonan: EnemyBossRonan = EnemyBossRonan("Ronan the Accuser", 3500, 3500, 2500, 2500, 120, "Taktiker", attacksBossRonan, false, true, inFight, deadEnemys)
+var korath: EnemyKorath = EnemyKorath("Korath the Pursuer", 1000, 3500, 1500, 1500, 110, "Nahkampf", attacksKorath, false, true, inFight, deadEnemys)
 
-fun useBeutel(hero: Hero) {
+fun useBag(hero: Hero) {
     if (hero.hasUsedBeutel == true) {
         println("${hero.name} hat den Beutel bereits in dieser Runde verwendet.")
-    } else if (rucksack.isEmpty()) {
+    } else if (bag.isEmpty()) {
         println("Der Rucksack ist leer! ")
     } else {
-        for ((index, beutel) in rucksack.withIndex()) {
+        for ((index, beutel) in bag.withIndex()) {
             println("${index}. ${beutel.name}")
         }
         val beutelChoice : Int = readln().toInt()
@@ -86,21 +86,21 @@ fun useBeutel(hero: Hero) {
             when (beutelChoice) {
                 0 -> {
                     println("${hero.name} hat ${hero.lp} Lebenspunkte")
-                    println("${hero.name} trinkt ${rucksack[0].name}!")
+                    println("${hero.name} trinkt ${bag[0].name}!")
                     println("${hero.name} Lebenspunkte werden um die Hälfte seiner ursprünglichen Lebenspunkte geheilt")
                     if (hero.lp < (hero.lpStandart / 2)) {
-                        hero.lp + (hero.lpStandart / rucksack[0].value)
+                        hero.lp + (hero.lpStandart / bag[0].value)
                     } else {
                         val fullLp = hero.lpStandart
                         hero.lp = fullLp
                     }
                     println("${hero.name} hat nun ${hero.lp} Lebenspunkte!")
                     println()
-                    rucksack[beutelChoice].amount - 1
+                    bag[beutelChoice].amount - 1
                 }
                 1 -> {
                     //erhöhen den Schadenswert für einen Helden dauerhaft um 10%
-                    println("${hero.name} nutzt ${rucksack[1].name}")
+                    println("${hero.name} nutzt ${bag[1].name}")
                     println("${hero.name}'s Attacken werden stärker um 10%")
                     println()
                     for (heroAttack in hero.attacks) {
@@ -123,10 +123,10 @@ fun FirstRound() {
     println()
     val gezogeneHelden = mutableListOf<Hero>()
     var continueBattle = true
-    for (held in listeDerHelden) {
-        while (continueBattle && listeDerHelden.isNotEmpty()) {
-            for (held in listeDerHelden.sortedByDescending { it.speed }) {
-                if (listeDerHelden.isEmpty()) {
+    for (held in listHeros) {
+        while (continueBattle && listHeros.isNotEmpty()) {
+            for (held in listHeros.sortedByDescending { it.speed }) {
+                if (listHeros.isEmpty()) {
                     break
                 }
                 if (held in gezogeneHelden) {
@@ -165,12 +165,12 @@ fun FirstRound() {
                                 println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
                             }
                         }
-                        held.attackEnemy(endgegner_ronan, held.attacks[attackChoice])
+                        held.attackEnemy(bossRonan, held.attacks[attackChoice])
 
-                        val gestorben = listeDerHelden.filter { it.lp <= 0 }
+                        val gestorben = listHeros.filter { it.lp <= 0 }
                         for (helden in gestorben) {
                             deadHeros.add(helden)
-                            listeDerHelden.remove(helden)
+                            listHeros.remove(helden)
                             println("${helden.name} ist gestorben")
                         }
                         gezogeneHelden.add(held)
@@ -178,7 +178,7 @@ fun FirstRound() {
                     }
                     2 -> {
                         println("Du öffnest deinen Beutel und siehst, was darin ist.")
-                        useBeutel(held)
+                        useBag(held)
                     }
                     else -> {
                         println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
@@ -192,23 +192,23 @@ fun firstRoundEnemy(){
     StoryLine2()
     println()
     var randomAttack = (0..5).random()
-    if (randomAttack == 2 && endgegner_ronan.helferLebt == true && endgegner_ronan.helferBeschworen == false){
-        endgegner_ronan.HelferBeschwören(helfer_Endgegner)
+    if (randomAttack == 2 && bossRonan.helferLebt && !bossRonan.helferBeschworen){
+        bossRonan.HelferBeschwören(korath)
     } else if (randomAttack == 0) {
-        endgegner_ronan.HammerSchockWelle(listeDerHelden)
+        bossRonan.HammerSchockWelle(listHeros)
     } else if (randomAttack == 1) {
-        endgegner_ronan.Packen(listeDerHelden.random())
+        bossRonan.Packen(listHeros.random())
     } else if (randomAttack == 3) {
-        endgegner_ronan.attacke_simple(listeDerHelden.random(), endgegner_ronan.attaken[3])
+        bossRonan.attacke_simple(listHeros.random(), bossRonan.attaken[3])
     } else if (randomAttack == 4) {
-        endgegner_ronan.attacke_simple(listeDerHelden.random(), endgegner_ronan.attaken[4])
+        bossRonan.attacke_simple(listHeros.random(), bossRonan.attaken[4])
     } else if (randomAttack == 5) {
-        endgegner_ronan.attacke_simple(listeDerHelden.random(), endgegner_ronan.attaken[5])
+        bossRonan.attacke_simple(listHeros.random(), bossRonan.attaken[5])
     }
 }
 
 fun main(){
-    endgegner_ronan.EndgegnerinFight(endgegner_ronan)
+    bossRonan.EndgegnerinFight(bossRonan)
     FirstRound()
     firstRoundEnemy()
 }

@@ -1,6 +1,6 @@
 package Heros
 
-class Hero_Ingenieur(
+class HeroPeter(
     name: String,
     lp: Int,
     lpReduction: Int,
@@ -8,7 +8,7 @@ class Hero_Ingenieur(
     armorReduction: Int,
     speed: Int,
     weakness: String,
-    attacks: MutableList<Attacke_Heros>,
+    attacks: MutableList<AttacksHeros>,
     hasUsedBeutel: Boolean
 ) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel) {
 }

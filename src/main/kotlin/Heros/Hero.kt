@@ -1,6 +1,5 @@
 package Heros
 
-import Beutel.Beutel
 import Enemy.Enemy
 
 open class Hero(
@@ -11,10 +10,10 @@ open class Hero(
     var armorReduction: Int,
     var speed: Int,
     var weakness: String,
-    var attacks: MutableList<Attacke_Heros>,
+    var attacks: MutableList<AttacksHeros>,
     var hasUsedBeutel: Boolean
 ) {
-    fun attackEnemy(enemy: Enemy, attacke: Attacke_Heros) {
+    fun attackEnemy(enemy: Enemy, attacke: AttacksHeros) {
         if (attacke.healOrdamage!! > enemy.lp) {
             enemy.lp = 0
             println("${this.name} hat ${attacke.name} angewand und damit ${enemy.name} besiegt")

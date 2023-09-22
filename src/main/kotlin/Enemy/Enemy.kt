@@ -1,7 +1,5 @@
 package Enemy
-import Heros.Attacke_Heros
 import Heros.Hero
-import kotlin.time.times
 
 open class Enemy(
     var name: String,
@@ -11,7 +9,7 @@ open class Enemy(
     var armorReduction: Int,
     var speed: Int,
     var weakness: String,
-    var attaken: MutableList<Attacke_Enemys> = mutableListOf(),
+    var attaken: MutableList<AttacksEnemys> = mutableListOf(),
     var helferBeschworen: Boolean,
     var helferLebt: Boolean,
     var inFight: MutableList<Enemy> = mutableListOf(),
@@ -33,7 +31,7 @@ open class Enemy(
         inFight.add(this)
     }
 
-    fun HelferBeschwören(helfer : Enemy_Taktiker){
+    fun HelferBeschwören(helfer : EnemyKorath){
         println("${this.name} beschwört einen treuen Anhänger der Kree-Krieger!!")
         println("Eine große schwarze Wolke taucht vor ${this.name} auf und daraus entspringt: ${helfer.name}")
         inFight.add(helfer)
@@ -54,7 +52,7 @@ open class Enemy(
         println("${hero.name} hat nun nurnoch ${hero.lp} Lebenspunkte")
     }
 
-    fun attacke_simple(hero: Hero, attacke: Attacke_Enemys) {
+    fun attacke_simple(hero: Hero, attacke: AttacksEnemys) {
         if (attacke.healOrDamage!! >= hero.lp) {
             hero.lp = 0
             println("${this.name} hat ${attacke.name} angewand und damit ${hero.name} besiegt")
