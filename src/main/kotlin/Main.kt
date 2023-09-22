@@ -5,44 +5,44 @@ import Enemy.Enemy_Taktiker
 import Enemy.Enemy_Übernatürlicher
 import Heros.*
 
-var gestorbeneHelden: MutableList<Hero> = mutableListOf()
+private var deadHeros: MutableList<Hero> = mutableListOf()
 
-var attackenGamora: MutableList<Attacke_Heros> = mutableListOf(
+private var attacksGamora: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Tritt", 500),
     Attacke_Heros("Kampfkunstattacke", 500),
     Attacke_Heros("Wurfwaffe", 500),
     Attacke_Heros("Kombikampf", 500),
 )
-var attackenDrax: MutableList<Attacke_Heros> = mutableListOf(
+private var attacksDrax: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Hieb", 500),
     Attacke_Heros("Messerattacke", 500),
     Attacke_Heros("Tritt", 500),
     Attacke_Heros("Round-House-Kick", 600)
 )
-var attackenRocket: MutableList<Attacke_Heros> = mutableListOf(
+private var attacksRocket: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Präzisionsschüsse", 500),
     Attacke_Heros("Hacking", 500),
     Attacke_Heros("Modifizierung", 500),
     Attacke_Heros("Bombe", 500),
 )
-var attackenGroot: MutableList<Attacke_Heros> = mutableListOf(
+private var attacksGroot: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Astpfeile", 500),
     Attacke_Heros("Peitschenäste", 400),
     Attacke_Heros("Durchbohren", 550),
     Attacke_Heros("Würgen", 400),
 )
-var attackenPeter: MutableList<Attacke_Heros> = mutableListOf(
+private var attacksPeter: MutableList<Attacke_Heros> = mutableListOf(
     Attacke_Heros("Blast", 500),
     Attacke_Heros("Manipulieren", 300),
     Attacke_Heros("Jet-Pack", 500),
     Attacke_Heros("Doppelschuss", 500)
 )
 
-var gamora: Hero_Nahkaempfer = Hero_Nahkaempfer("Gamora", 3200, 3200, 400, 400, 135, "Taktiker", attackenGamora, false)
-var drax: Hero_Nahkaempfer = Hero_Nahkaempfer("Drax", 4500, 4500, 550, 550, 100, "Taktiker", attackenDrax, false)
-var rocket: Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 400, 1400, 1400, 145, "Nahkämpfer", attackenRocket, false)
-var groot: Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000, 5000, 80, "Nahkämpfer", attackenGroot, false)
-var peter: Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, "Nahkämpfer", attackenPeter, false)
+var gamora: Hero_Nahkaempfer = Hero_Nahkaempfer("Gamora", 3200, 3200, 400, 400, 135, "Taktiker", attacksGamora, false)
+var drax: Hero_Nahkaempfer = Hero_Nahkaempfer("Drax", 4500, 4500, 550, 550, 100, "Taktiker", attacksDrax, false)
+var rocket: Hero_Ingenieur = Hero_Ingenieur("Rocket", 400, 400, 1400, 1400, 145, "Nahkämpfer", attacksRocket, false)
+var groot: Hero_Plantoid = Hero_Plantoid("Groot", 5000, 5000, 5000, 5000, 80, "Nahkämpfer", attacksGroot, false)
+var peter: Hero_Taktiker = Hero_Taktiker("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, "Nahkämpfer", attacksPeter, false)
 
 var listeDerHelden = mutableListOf(gamora, drax, rocket, groot, peter)
 
@@ -169,7 +169,7 @@ fun FirstRound() {
 
                         val gestorben = listeDerHelden.filter { it.lp <= 0 }
                         for (helden in gestorben) {
-                            gestorbeneHelden.add(helden)
+                            deadHeros.add(helden)
                             listeDerHelden.remove(helden)
                             println("${helden.name} ist gestorben")
                         }
@@ -188,27 +188,22 @@ fun FirstRound() {
         }
     }
 }
-
 fun firstRoundEnemy(){
     StoryLine2()
     println()
     var randomAttack = (0..5).random()
-    if (randomAttack == 5 && endgegner_ronan.helferLebt == true && endgegner_ronan.helferBeschworen == false){
+    if (randomAttack == 2 && endgegner_ronan.helferLebt == true && endgegner_ronan.helferBeschworen == false){
         endgegner_ronan.HelferBeschwören(helfer_Endgegner)
     } else if (randomAttack == 0) {
         endgegner_ronan.HammerSchockWelle(listeDerHelden)
     } else if (randomAttack == 1) {
-
-
-
-
-
-        //////////////////////////
-
-
-
-
-
+        endgegner_ronan.Packen(listeDerHelden.random())
+    } else if (randomAttack == 3) {
+        endgegner_ronan.attacke_simple(listeDerHelden.random(), endgegner_ronan.attaken[3])
+    } else if (randomAttack == 4) {
+        endgegner_ronan.attacke_simple(listeDerHelden.random(), endgegner_ronan.attaken[4])
+    } else if (randomAttack == 5) {
+        endgegner_ronan.attacke_simple(listeDerHelden.random(), endgegner_ronan.attaken[5])
     }
 }
 
@@ -217,3 +212,22 @@ fun main(){
     FirstRound()
     firstRoundEnemy()
 }
+
+//Textfarben:
+//Schwarzer Text: \u001B[30m
+//Rot: \u001B[31m
+//Grün: \u001B[32m
+//Gelb: \u001B[33m
+//Blau: \u001B[34m
+//Magenta: \u001B[35m
+//Cyan: \u001B[36m
+//Weiß: \u001B[37m
+//Hintergrundfarben:
+//Schwarzer Hintergrund: \u001B[40m
+//Rot: \u001B[41m
+//Grün: \u001B[42m
+//Gelb: \u001B[43m
+//Blau: \u001B[44m
+//Magenta: \u001B[45m
+//Cyan: \u001B[46m
+//Weiß: \u001B[47m

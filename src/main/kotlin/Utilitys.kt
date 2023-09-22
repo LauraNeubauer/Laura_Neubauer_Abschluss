@@ -19,3 +19,4 @@ fun StoryLine2(){
             "erhebt sich über das Schlachtfeld. Seine mächtige Waffe, der Cosmi-Rod, glüht vor übernatürlicher Energie, " +
             "und er lässt einen vernichtenden Energiestrahl auf die Guardians niederregnen.")
 }
+

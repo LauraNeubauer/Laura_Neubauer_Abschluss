@@ -54,8 +54,8 @@ open class Enemy(
         println("${hero.name} hat nun nurnoch ${hero.lp} Lebenspunkte")
     }
 
-    fun attacke_simple(hero: Hero, attacke: Attacke_Heros) {
-        if (attacke.healOrdamage!! > hero.lp) {
+    fun attacke_simple(hero: Hero, attacke: Attacke_Enemys) {
+        if (attacke.healOrDamage!! >= hero.lp) {
             hero.lp = 0
             println("${this.name} hat ${attacke.name} angewand und damit ${hero.name} besiegt")
             println("${hero.name} ist besiegt!")
@@ -63,73 +63,73 @@ open class Enemy(
             val remainingArmorPercent = if (hero.armor != 0) (hero.armorReduction * 100) / hero.armor else 0
             println("${hero.name} hat $remainingArmorPercent % Rüstung")
             if (remainingArmorPercent in 90..100) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 10
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 10
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 80..90) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 20
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 20
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 70..80) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 30
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 30
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 60..70) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 40
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 40
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 50..60) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 50
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 50
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 40..50) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 60
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 60
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 30..40) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 70
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 70
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 20..30) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 80
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 80
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 10..20) {
-                val realDamage = (attacke.healOrdamage!! / 100) * 90
-                hero.armorReduction -= attacke.healOrdamage!!
+                val realDamage = (attacke.healOrDamage!! / 100) * 90
+                hero.armorReduction -= attacke.healOrDamage!!
                 hero.lp -= realDamage
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent < 10) {
                 hero.armor = 0
-                hero.lp -= attacke.healOrdamage!!
+                hero.lp -= attacke.healOrDamage!!
                 println("${this.name} hat ${attacke.name} angewand!")
-                println("${hero.name} verliert ${attacke.healOrdamage} Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
+                println("${hero.name} verliert ${attacke.healOrDamage} Lebenspunkte und hat noch ${hero.lp} Lebenspunkte!")
                 println()
             }
         }

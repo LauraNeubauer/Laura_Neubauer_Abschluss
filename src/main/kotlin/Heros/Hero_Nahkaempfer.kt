@@ -10,4 +10,4 @@ class Hero_Nahkaempfer(
     weakness: String,
     attacks: MutableList<Attacke_Heros>,
     hasUsedBeutel: Boolean
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel, )
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel, ){}
