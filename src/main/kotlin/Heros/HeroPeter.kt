@@ -9,6 +9,7 @@ class HeroPeter(
     speed: Int,
     weakness: String,
     attacks: MutableList<AttacksHeros>,
-    hasUsedBeutel: Boolean
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel) {
+    hasUsedBeutel: Boolean,
+    cursed: Boolean
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel, cursed) {
 }

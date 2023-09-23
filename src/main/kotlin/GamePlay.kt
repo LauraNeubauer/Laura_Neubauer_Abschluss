@@ -1,4 +1,4 @@
-import Beutel.Bag
+import BagClass.Bag
 import Heros.Hero
 
 class GamePlay(

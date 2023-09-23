@@ -23,9 +23,9 @@ Einen Namen, HP (Gesundheitspunkte) und vier Aktionen
 ● Beispiele für Aktionen:
 Angriffe mit unterschiedlichen Schadenswerten, Heilungsmöglichkeiten, oder Schutzzauber,
 die einen Helden einmalig vor dem nächsten Angriff schützen.
-● Deine Heldengruppe hat einen Beutel. Dieser kann einmalig pro Runde genutzt werden.
+● Deine Heldengruppe hat einen BagClass. Dieser kann einmalig pro Runde genutzt werden.
 Wenn du ihn benutzt, kann ein Held aus deinem Team in dieser Runde keine weitere Aktion
-ausführen. In dem Beutel sind Gegenstände, die einen direkten Effekt auswirken, z.B.:
+ausführen. In dem BagClass sind Gegenstände, die einen direkten Effekt auswirken, z.B.:
 o 3x Heiltrank: heilt einen frei wählbaren Helden um die Hälfte seiner Lebenspunkte
 o 1x Vitamine: erhöhen den Schadenswert für einen Helden dauerhaft um 10%.
 

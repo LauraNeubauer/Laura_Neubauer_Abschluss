@@ -11,7 +11,8 @@ open class Hero(
     var speed: Int,
     var weakness: String,
     var attacks: MutableList<AttacksHeros>,
-    var hasUsedBeutel: Boolean
+    var hasUsedBag: Boolean,
+    var cursed: Boolean
 ) {
     fun attackEnemy(enemy: Enemy, attacke: AttacksHeros) {
         if (attacke.healOrdamage!! > enemy.lp) {
@@ -20,7 +21,9 @@ open class Hero(
             println("${enemy.name} ist besiegt!")
         } else {
             val remainingArmorPercent = if (enemy.armor != 0) (enemy.armorReduction * 100) / enemy.armor else 0
-            println("${enemy.name} hat $remainingArmorPercent % Rüstung")
+            if (remainingArmorPercent > 0) {
+                println("${enemy.name} hat $remainingArmorPercent % Rüstung")
+            }
             if (remainingArmorPercent in 90..100) {
                 val realDamage = (attacke.healOrdamage!! / 100) * 10
                 enemy.armorReduction -= attacke.healOrdamage!!

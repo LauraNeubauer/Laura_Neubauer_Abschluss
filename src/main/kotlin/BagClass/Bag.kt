@@ -1,4 +1,4 @@
-package Beutel
+package BagClass
 
 class Bag(
     var name: String,
