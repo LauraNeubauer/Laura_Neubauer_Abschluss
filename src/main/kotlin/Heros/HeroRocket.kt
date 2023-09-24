@@ -7,9 +7,7 @@ class HeroRocket(
     armor: Int,
     armorReduction: Int,
     speed: Int,
-    weakness: String,
     attacks: MutableList<AttacksHeros>,
-    hasUsedBeutel: Boolean,
-    cursed: Boolean
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel, cursed) {
+    hasUsedBag: Boolean,
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, attacks, hasUsedBag) {
 }

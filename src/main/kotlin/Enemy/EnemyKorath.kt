@@ -6,14 +6,12 @@ class EnemyKorath(
     lpStandart: Int,
     armor: Int,
     armorReduction: Int,
-    speed: Int,
-    weakness: String,
     attaken: MutableList<AttacksEnemys>,
-    helferBeschworen: Boolean,
-    helperAlive: Boolean,
+    korathInFight: Boolean,
+    korathAlive: Boolean,
     inFight: MutableList<Enemy>,
-    tot: MutableList<Enemy>
-) : Enemy(name, lp, lpStandart, armor, armorReduction, speed, weakness, attaken, helferBeschworen, helperAlive, inFight, tot) {
+    dead: MutableList<Enemy>
+) : Enemy(name, lp, lpStandart, armor, armorReduction, attaken, korathInFight, korathAlive, inFight, dead) {
     fun healEndgegner(enemy: Enemy) {
         val needHealing: Boolean = enemy.lp <= (enemy.lpStandart - 400)
         var healing: Int = enemy.attaken[3].healOrDamage!!

@@ -9,10 +9,8 @@ open class Hero(
     var armor: Int,
     var armorReduction: Int,
     var speed: Int,
-    var weakness: String,
     var attacks: MutableList<AttacksHeros>,
-    var hasUsedBag: Boolean,
-    var cursed: Boolean
+    var hasUsedBag: Boolean
 ) {
     fun attackEnemy(enemy: Enemy, attacke: AttacksHeros) {
         if (attacke.healOrdamage!! > enemy.lp) {

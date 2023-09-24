@@ -6,12 +6,10 @@ class EnemyBossRonan(
     lpStandart: Int,
     armor: Int,
     armorReduction: Int,
-    speed: Int,
-    weakness: String,
     attaken: MutableList<AttacksEnemys> = mutableListOf(),
-    helferBeschworen: Boolean,
-    helferLebt: Boolean,
+    korathInFight: Boolean,
+    korathAlive: Boolean,
     inFight: MutableList<Enemy>,
     tot: MutableList<Enemy>
-) : Enemy(name, lp, lpStandart, armor, armorReduction, speed, weakness, attaken, helferBeschworen, helferLebt, inFight, tot) {
+) : Enemy(name, lp, lpStandart, armor, armorReduction, attaken, korathInFight, korathAlive, inFight, tot) {
 }

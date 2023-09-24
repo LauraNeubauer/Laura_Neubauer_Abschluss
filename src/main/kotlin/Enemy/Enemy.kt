@@ -7,8 +7,6 @@ open class Enemy(
     var lpStandart: Int,
     var armor: Int,
     var armorReduction: Int,
-    var speed: Int,
-    var weakness: String,
     var attaken: MutableList<AttacksEnemys> = mutableListOf(),
     var korathIsInFight: Boolean,
     var korathIsAlive: Boolean,
@@ -18,16 +16,16 @@ open class Enemy(
     fun HammerSchockWelle(heroes: MutableList<Hero>, deadHeros: MutableList<Hero>) {
         for (hero in heroes) {
             val damage: Int = this.attaken[0].healOrDamage!!
-            if (hero.lp > damage){
-                println("${this.name} hat ${hero.name} um 300 Lebenspunkte verletzt!!")
-                println("${hero.name} hat noch ${hero.lp} Lebenspunkte")
-                hero.lp -= damage
-            } else {
+            println("${this.name} hat ${hero.name} um 300 Lebenspunkte verletzt!!")
+            println("${hero.name} hat noch ${hero.lp} Lebenspunkte")
+            if (hero.lp < damage) {
                 hero.lp = 0
                 heroes.remove(hero)
-                deadHeros.add(hero)
+            } else {
+                hero.lp -= damage
             }
         }
+        println()
     }
 
     fun EndgegnerinFight(endgegner : Enemy){
@@ -41,22 +39,6 @@ open class Enemy(
         println("${this.name} beschwört einen treuen Anhänger der Kree-Krieger!!")
         println("Eine große schwarze Wolke taucht vor ${this.name} auf und daraus entspringt: ${helfer.name}")
         inFight.add(helfer)
-    }
-
-    fun grab(hero: Hero) {
-        while (hero.cursed) {
-            val startLP = hero.lp
-            val wert = hero.lpStandart * 0.2
-            val damagePerRound: Double = (startLP * 0.1)
-            if (hero.lp > wert) {
-                hero.lp -= damagePerRound.toInt()
-                if (hero.lp < wert) {
-                    hero.lp = wert.toInt()
-                }
-                println("${hero.name} hat ${hero.name} gepackt!")
-                println("${hero.name} hat nun ${hero.lp} Lebenspunkte.")
-            }
-        }
     }
 
     fun attacke_simple(heroes: MutableList<Hero>, attacke: AttacksEnemys, deadHeros: MutableList<Hero>) {

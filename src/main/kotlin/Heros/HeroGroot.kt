@@ -7,20 +7,6 @@ class HeroGroot(
     armor: Int,
     armorReduction: Int,
     speed: Int,
-    weakness: String,
     attacks: MutableList<AttacksHeros>,
-    hasUsedBeutel: Boolean,
-    cursed: Boolean
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, weakness, attacks, hasUsedBeutel, cursed) {
-
-    fun healHero(hero: Hero) {
-        val needHealing: Boolean = hero.lp <= (hero.lpStandart - 400)
-        var healing: Int = this.attacks[3].healOrdamage!!
-        if (needHealing == true) {
-            hero.lp + healing
-            println("${this.name} hat ${hero.name} um $healing geheilt")
-        } else {
-            println("${hero.name} ist nicht verletzt!")
-        }
-    }
-}
+    hasUsedBag: Boolean,
+) : Hero(name, lp, lpReduction, armor, armorReduction, speed, attacks, hasUsedBag) {}
