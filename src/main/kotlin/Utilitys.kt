@@ -14,9 +14,17 @@ fun StoryLine(){
             "Unausweichliche.")
 }
 
-fun StoryLine2(){
+fun storyLine2(){
     println("Ronan, in seiner fanatischen Entschlossenheit und getrieben von einem unstillbaren Durst nach Macht, " +
             "erhebt sich über das Schlachtfeld. Seine mächtige Waffe, der Cosmi-Rod, glüht vor übernatürlicher Energie, " +
             "und er lässt einen vernichtenden Energiestrahl auf die Guardians niederregnen.")
+}
+fun storyLineWin(){
+    println("Mit Ronans Niederlage wird die Zerstörung von Xandar gestoppt, " +
+            "und die Nova Corps sind gerettet. Die Bewohner von Xandar jubeln den Guardians zu und danken ihnen als Helden.")
+}
+fun storyLineLoose(){
+    println("Mit Ronans Niederlage wird die Zerstörung von Xandar gestoppt, " +
+            "und die Nova Corps sind gerettet. Die Bewohner von Xandar jubeln den Guardians zu und danken ihnen als Helden.")
 }
 

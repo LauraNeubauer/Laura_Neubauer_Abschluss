@@ -15,16 +15,17 @@ open class Enemy(
     var inFight: MutableList<Enemy> = mutableListOf(),
     var dead: MutableList<Enemy> = mutableListOf()
 ) {
-    fun HammerSchockWelle(heroes: MutableList<Hero>) {
+    fun HammerSchockWelle(heroes: MutableList<Hero>, deadHeros: MutableList<Hero>) {
         for (hero in heroes) {
-            val damage: Int? = this.attaken[0].healOrDamage
-            if (hero.lp > damage!!){
+            val damage: Int = this.attaken[0].healOrDamage!!
+            if (hero.lp > damage){
                 println("${this.name} hat ${hero.name} um 300 Lebenspunkte verletzt!!")
                 println("${hero.name} hat noch ${hero.lp} Lebenspunkte")
                 hero.lp -= damage
             } else {
                 hero.lp = 0
                 heroes.remove(hero)
+                deadHeros.add(hero)
             }
         }
     }
@@ -58,13 +59,14 @@ open class Enemy(
         }
     }
 
-    fun attacke_simple(heroes: MutableList<Hero>, attacke: AttacksEnemys) {
+    fun attacke_simple(heroes: MutableList<Hero>, attacke: AttacksEnemys, deadHeros: MutableList<Hero>) {
         var randomHero = heroes.random()
         if (attacke.healOrDamage!! >= randomHero.lp) {
             randomHero.lp = 0
             println("${this.name} hat ${attacke.name} angewand und damit ${randomHero.name} besiegt")
             println("${randomHero.name} ist besiegt!")
             heroes.remove(randomHero)
+            deadHeros.add(randomHero)
         } else {
             val remainingArmorPercent = if (randomHero.armor != 0) (randomHero.armorReduction * 100) / randomHero.armor else 0
             if (remainingArmorPercent > 0) {
@@ -136,6 +138,7 @@ open class Enemy(
             } else if (remainingArmorPercent < 10) {
                 randomHero.armor = 0
                 randomHero.lp -= attacke.healOrDamage!!
+                println("${randomHero.name} hat keine schützende Rüstung mehr! Der Schaden geht nun komplett auf die Lebenspunkte!")
                 println("${this.name} hat ${attacke.name} angewand!")
                 println("${randomHero.name} verliert ${attacke.healOrDamage} Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()

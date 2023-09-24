@@ -47,23 +47,23 @@ var peter: HeroPeter = HeroPeter("Peter Quill (Star-Lord)", 800, 800, 2300, 2300
 var listHeros = mutableListOf(gamora, drax, rocket, groot, peter)
 
 var bag: MutableList<Bag> = mutableListOf(
-    Bag("Groot's Vitalttrank", 2, 5),
-    Bag("Elementar Kristalle", 10, 4),
+    Bag("Gamoras Upgrade-Kit", 2, 5),
+    Bag("Groot' Vitaltrunk", 10, 4),
 )
 
 var attacksBossRonan: MutableList<AttacksEnemys> = mutableListOf(
     AttacksEnemys("Hammer-Schock-Welle", 300),
     AttacksEnemys("Packen", 10),
-    AttacksEnemys("Beschwören", null),
+    AttacksEnemys("Schuss", 350),
     AttacksEnemys("Tritt", 440),
     AttacksEnemys("Hammerhieb", 700),
-    AttacksEnemys("Schuss", 350),
+    AttacksEnemys("Beschwören", null),
 )
 var attacksKorath: MutableList<AttacksEnemys> = mutableListOf(
     AttacksEnemys("Tritt", 440),
     AttacksEnemys("Schuss", 350),
     AttacksEnemys("Doppelschuss", 350),
-    AttacksEnemys("Heilungsblitz", 350),
+    AttacksEnemys("Feuer", 350),
 )
 
 var inFight: MutableList<Enemy> = mutableListOf()
@@ -170,6 +170,9 @@ fun fightHeros() {
                             chooseEnemy(enemyList)
                             var choosenEnemy = readln().toInt()
                             hero.attackEnemy(inFight[choosenEnemy], hero.attacks[attackChoice])
+                            ///////////////////////////////////////////////////////////////////////////
+                            //Exeption Index 2 out of bounds for lenght 2 // Number formaat exeption //
+                            ///////////////////////////////////////////////////////////////////////////
                             val gestorben = listHeros.filter { it.lp <= 0 }
                             for (helden in gestorben) {
                                 deadHeros.add(helden)
@@ -205,25 +208,67 @@ fun fightHeros() {
     }
 }
 fun fightEnemys(){
-    StoryLine2()
+    storyLine2()
     println()
-    var randomAttack = (0..5).random()
+    var randomAttackRonan = (0..5).random()
+    var randomAttackKorath = (0..3).random()
     var randomHero = listHeros.random()
-    if (randomAttack == 2 && bossRonan.korathIsAlive && !bossRonan.korathIsInFight){
-        bossRonan.HelferBeschwören(korath)
-    } else if (randomAttack == 0) {
-        bossRonan.HammerSchockWelle(listHeros)
-    } else if (randomAttack == 1 && !randomHero.cursed) {
-        randomHero.cursed
-        bossRonan.grab(randomHero)
-    } else if (randomAttack == 3) {
-        bossRonan.attacke_simple(listHeros, bossRonan.attaken[3])
-    } else if (randomAttack == 4) {
-        bossRonan.attacke_simple(listHeros, bossRonan.attaken[4])
-    } else if (randomAttack == 5) {
-        bossRonan.attacke_simple(listHeros, bossRonan.attaken[5])
+    if (randomAttackRonan == 2){
+        if (inFight.contains(korath)){
+            korath.attacke_simple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[2], deadHeros)
+        } else {
+            // funktioniert
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[2], deadHeros)
+        }
+    } else if (randomAttackRonan == 0) {
+        if (inFight.contains(korath)){
+            korath.attacke_simple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            bossRonan.HammerSchockWelle(listHeros, deadHeros)
+        } else {
+            //funktioniert
+            bossRonan.HammerSchockWelle(listHeros, deadHeros)
+        }
+    } else if (randomAttackRonan == 1) {
+        if (inFight.contains(korath) && !randomHero.cursed){
+            korath.attacke_simple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            randomHero.cursed
+            bossRonan.grab(randomHero)
+        } else {
+            var herosNotCursed = listHeros.filter { !it.cursed }
+            var randomHeroNotCured = herosNotCursed.random()
+            bossRonan.grab(randomHeroNotCured)
+        }
+    } else if (randomAttackRonan == 3) {
+        if (inFight.contains(korath)){
+            korath.attacke_simple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[3], deadHeros)
+        } else {
+            // Attack "Tritt" without Korath
+            //funktioniert
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[3], deadHeros)
+        }
+    } else if (randomAttackRonan == 4) {
+        if (inFight.contains(korath)){
+            korath.attacke_simple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[4], deadHeros)
+        } else {
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[4], deadHeros)
+        }
+    } else if (randomAttackRonan == 5) {
+        if (inFight.contains(korath)){
+            korath.attacke_simple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            val alternative = (0..4).random()
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[alternative], deadHeros)
+        } else if (bossRonan.korathIsAlive){
+            bossRonan.HelferBeschwören(korath)
+        } else {
+            val alternative = (0..4).random()
+            bossRonan.attacke_simple(listHeros, bossRonan.attaken[alternative], deadHeros)
+        }
     }
 }
+
 fun chooseEnemy(enemys: MutableList<Enemy>) {
     for ((index, enemy) in enemys.withIndex()) {
         println("$index: ${enemy.name}")
@@ -231,7 +276,7 @@ fun chooseEnemy(enemys: MutableList<Enemy>) {
 }
 
 fun main() {
-    for (hero in listHeros){
+    for (hero in listHeros) {
         bossRonan.EndgegnerinFight(bossRonan)
         while (inFight.isNotEmpty() && listHeros.isNotEmpty()) {
             fightHeros()

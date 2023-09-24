@@ -90,6 +90,7 @@ open class Hero(
             } else if (remainingArmorPercent < 10) {
                 enemy.armor = 0
                 enemy.lp -= attacke.healOrdamage!!
+                println("${enemy.name} hat keine Rüstung mehr! ${this.name}'s Attacke macht nun mehr Schaden auf die Lebenspunkte!")
                 println("${this.name} hat ${attacke.name} angewand!")
                 println("${enemy.name} verliert ${attacke.healOrdamage} Lebenspunkte und hat noch ${enemy.lp} Lebenspunkte!")
                 println()
