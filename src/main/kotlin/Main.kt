@@ -5,7 +5,7 @@ import Enemy.EnemyKorath
 import Enemy.EnemyBossRonan
 import Heros.*
 
-// To-Do:   - Beutel gibt bei falscher angabe nur "ungültige auswahl" aus, ohne eine neue auswahl anzunehmen
+// To-Do:
 //          - Auswahl Gegner - 3 eingeben: gibt aus: "Wähle einen Gegner aus" aber nimmt keine neue auswahl an
 //          - Auswahl Gegner - 2 eingeben: gibt aus: kämpft einfach gegen korath ohne nach richtigem index zu fragen
 //          - Beutel verwendet pro Runde stimmt nicht, es wird generell gespeichert ob er den beutel genutzt hat
@@ -48,17 +48,17 @@ var attacksPeter: MutableList<AttacksHeros> = mutableListOf(
     AttacksHeros("Doppelschuss", 500)
 )
 
-var gamora: HeroDraxAndGamora = HeroDraxAndGamora("Gamora", 3200, 3200, 400, 400, 135, attacksGamora, false)
-var drax: HeroDraxAndGamora = HeroDraxAndGamora("Drax", 4500, 4500, 550, 550, 100, attacksDrax, false)
-var rocket: HeroRocket = HeroRocket("Rocket", 400, 400, 1400, 1400, 145, attacksRocket, false)
-var groot: HeroGroot = HeroGroot("Groot", 5000, 5000, 5000, 5000, 80, attacksGroot, false)
-var peter: HeroPeter = HeroPeter("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, attacksPeter, false)
+var gamora: HeroDraxAndGamora = HeroDraxAndGamora("Gamora", 3200, 3200, 400, 400, 135, attacksGamora)
+var drax: HeroDraxAndGamora = HeroDraxAndGamora("Drax", 4500, 4500, 550, 550, 100, attacksDrax)
+var rocket: HeroRocket = HeroRocket("Rocket", 400, 400, 1400, 1400, 145, attacksRocket)
+var groot: HeroGroot = HeroGroot("Groot", 5000, 5000, 5000, 5000, 80, attacksGroot)
+var peter: HeroPeter = HeroPeter("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, attacksPeter)
 
 var listHeros = mutableListOf(gamora, drax, rocket, groot, peter)
 
 var bag: MutableList<Bag> = mutableListOf(
     Bag("Gamoras Upgrade-Kit", 2, 5),
-    Bag("Groot' Vitaltrunk", 10, 4),
+    Bag("Groot's Vitaltrunk", 10, 5),
 )
 
 var attacksBossRonan: MutableList<AttacksEnemys> = mutableListOf(
@@ -77,60 +77,73 @@ var attacksKorath: MutableList<AttacksEnemys> = mutableListOf(
 )
 
 var inFight: MutableList<Enemy> = mutableListOf()
-var deadEnemys : MutableList<Enemy> = mutableListOf()
+var deadEnemy : MutableList<Enemy> = mutableListOf()
 
-var bossRonan: EnemyBossRonan = EnemyBossRonan("Ronan the Accuser", 13500, 3500, 2500, 2500, attacksBossRonan, false, true, inFight, deadEnemys)
-var korath: EnemyKorath = EnemyKorath("Korath the Pursuer", 12000, 3500, 1500, 1500, attacksKorath, false, true, inFight, deadEnemys)
+var bossRonan: EnemyBossRonan = EnemyBossRonan("Ronan the Accuser", 13500, 3500, 2500, 2500, attacksBossRonan, false, true, inFight, deadEnemy)
+var korath: EnemyKorath = EnemyKorath("Korath the Pursuer", 12000, 3500, 1500, 1500, attacksKorath, false, true, inFight, deadEnemy)
 
 var enemyList: MutableList<Enemy> = mutableListOf(bossRonan, korath)
 
-fun useBag(hero: Hero) {
-    if (hero.hasUsedBag == true) {
-        println("${hero.name} hat den Beutel bereits in dieser Runde verwendet.")
-    } else if (bag.isEmpty()) {
-        println("Der Rucksack ist leer! ")
-    } else {
-        for ((index, Bag) in bag.withIndex()) {
-            println("${index}. ${Bag.name}")
+fun usingBag(hero: Hero) {
+    val itemsInBag = bag.filter { it.amount > 0 }.toMutableList()
+
+    while (true) {
+        for ((index, bagItem) in itemsInBag.withIndex()) {
+            println("${index}. ${bagItem.amount}x ${bagItem.name}")
         }
-        val bagChoice : Int = readln().toInt()
-        if (bagChoice in (0..1)) {
-            when (bagChoice) {
-                0 -> {
-                    println("${hero.name} hat ${hero.lp} Lebenspunkte")
-                    println("${hero.name} trinkt ${bag[0].name}!")
-                    println("${hero.name} Lebenspunkte werden um die Hälfte seiner ursprünglichen Lebenspunkte geheilt")
-                    if (hero.lp < (hero.lpStandart / 2)) {
-                        hero.lp + (hero.lpStandart / bag[0].value)
-                    } else {
-                        val fullLp = hero.lpStandart
-                        hero.lp = fullLp
+
+        try {
+            val itemChoice: Int = readln().toInt()
+
+            if (itemChoice in 0..< itemsInBag.size) {
+                val selectedItem = itemsInBag[itemChoice]
+
+                when (itemChoice) {
+                    0 -> {
+                        println("${hero.name} hat ${hero.lp} Lebenspunkte")
+                        println("${hero.name} trinkt ${selectedItem.name}!")
+                        println("${hero.name} Lebenspunkte werden um die Hälfte seiner ursprünglichen Lebenspunkte geheilt")
+                        if (hero.lp < (hero.lpStandart / 2)) {
+                            hero.lp += (hero.lpStandart / selectedItem.value)
+                        } else {
+                            val fullLp = hero.lpStandart
+                            hero.lp = fullLp
+                        }
+                        println("${hero.name} hat nun ${hero.lp} Lebenspunkte!")
+                        println()
+                        selectedItem.amount -= 1
+                        if (selectedItem.amount <= 0) {
+                            itemsInBag.remove(selectedItem)
+                        }
+                        break
                     }
-                    println("${hero.name} hat nun ${hero.lp} Lebenspunkte!")
-                    println()
-                    bag[bagChoice].amount - 1
-                }
-                1 -> {
-                    println("${hero.name} nutzt ${bag[1].name}")
-                    println("${hero.name}'s Attacken werden stärker um 10%")
-                    println()
-                    for (heroAttack in hero.attacks) {
-                        val plus = (heroAttack.healOrdamage!! / 100) * 10
-                        print("${heroAttack.name}'s Schaden: ${heroAttack.healOrdamage} steigt auf ")
-                        heroAttack.healOrdamage = heroAttack.healOrdamage!! + plus
-                        println("${heroAttack.healOrdamage}")
+                    1 -> {
+                        println("${hero.name} nutzt ${selectedItem.name}")
+                        println("${hero.name}'s Attacken werden stärker um 10%")
+                        println()
+                        for (heroAttack in hero.attacks) {
+                            val plus = (heroAttack.healOrdamage!! / 100) * 10
+                            print("${heroAttack.name}'s Schaden: ${heroAttack.healOrdamage} steigt auf ")
+                            heroAttack.healOrdamage = heroAttack.healOrdamage!! + plus
+                            println("${heroAttack.healOrdamage}")
+                        }
+                        println()
+                        selectedItem.amount -= 1
+                        if (selectedItem.amount <= 0) {
+                            itemsInBag.remove(selectedItem)
+                        }
+                        break
                     }
-                    println()
                 }
+            } else {
+                println("Ungültige Auswahl.")
             }
-            hero.hasUsedBag = true
-        } else {
-            println("Ungültige Auswahl.")
+        } catch (e: NumberFormatException) {
+            println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
         }
     }
 }
 fun fightHeros() {
-    println()
     val fightingHero = mutableListOf<Hero>()
     var continueBattle = true
     for (chosenHero in listHeros) {
@@ -142,63 +155,95 @@ fun fightHeros() {
                 if (hero in fightingHero) {
                     continue
                 }
-                println("Es ist ${hero.name}'s Zug.")
-                println("Was möchtest du tun?")
-                println("1. Kämpfen und Attacke wählen")
-                println("2. Den Beutel nutzen")
+                val isBagEmpty = bag.all { it.amount == 0 }
                 var playerAction: Int? = null
-                while (playerAction == null || playerAction < 0 || playerAction > 2) {
-                    val input = readln()
+                if (!isBagEmpty) {
+                    println("Es ist ${hero.name}'s Zug.")
+                    println("Was möchtest du tun?")
+                    println("1. Kämpfen und Attacke wählen")
+                    println("2. Den Beutel nutzen")
+                    while (playerAction == null || playerAction < 1 || playerAction > 2) {
+                        val input = readln()
+                        try {
+                            playerAction = input.toInt()
 
-                    try {
-                        playerAction = input.toInt()
-
-                        if (playerAction < 0 || playerAction > 2) {
-                            println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
-                        }
-                    } catch (e: NumberFormatException) {
-                        println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
-                    }
-                }
-                when (playerAction) {
-                    1 -> {
-                        println("Du kämpfst mit ${hero.name}")
-                        println("Welche Attacke willst du ausführen?")
-                        for ((index, attack) in hero.attacks.withIndex()) {
-                            println("$index. ${attack.name}")
-                        }
-                        var attackChoice: Int? = null
-                        while (attackChoice == null || attackChoice < 0 || attackChoice >= hero.attacks.size) {
-                            val input = readln()
-                            attackChoice = input.toInt()
-                            if (attackChoice < 0 || attackChoice >= hero.attacks.size) {
-                                println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
+                            if (playerAction < 1 || playerAction > 2) {
+                                println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
                             }
+                        } catch (e: NumberFormatException) {
+                            println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
                         }
-                        if (inFight.contains(korath)){
-                            chooseEnemy(enemyList)
-                            val chosenEnemy = readln().toInt()
-                            if (chosenEnemy <= enemyList.size) {
-                                hero.attackEnemy(inFight[chosenEnemy], hero.attacks[attackChoice])
+                    }
+                    when (playerAction) {
+                        1 -> {
+                            println("Du kämpfst mit ${hero.name}")
+                            println("Welche Attacke willst du ausführen?")
+                            for ((index, attack) in hero.attacks.withIndex()) {
+                                println("$index. ${attack.name}")
+                            }
+                            var attackChoice: Int? = null
+                            while (attackChoice == null || attackChoice < 0 || attackChoice >= hero.attacks.size) {
+                                val input = readln()
+                                attackChoice = input.toInt()
+                                if (attackChoice < 0 || attackChoice >= hero.attacks.size) {
+                                    println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
+                                }
+                            }
+                            if (inFight.contains(korath)){
+                                chooseEnemy(enemyList)
+                                val chosenEnemy = readln().toInt()
+                                if (chosenEnemy <= enemyList.size) {
+                                    hero.attackEnemy(inFight[chosenEnemy], hero.attacks[attackChoice])
+                                    fightingHero.add(hero)
+                                    continueBattle = false
+                                } else {
+                                    println("Wähle einen Gegner aus!")
+
+                                }
+                            } else {
+                                hero.attackEnemy(bossRonan, hero.attacks[attackChoice])
                                 fightingHero.add(hero)
                                 continueBattle = false
-                            } else {
-                                println("Wähle einen Gegner aus!")
                             }
-                        } else {
-                            hero.attackEnemy(bossRonan, hero.attacks[attackChoice])
+                        }
+                        2 -> {
+                            println("Du öffnest deinen Beutel und siehst, was darin ist.")
+                            usingBag(hero)
                             fightingHero.add(hero)
                             continueBattle = false
                         }
+                        else -> {
+                            println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
+                        }
                     }
-                    2 -> {
-                        println("Du öffnest deinen Beutel und siehst, was darin ist.")
-                        useBag(hero)
+                } else {
+                    println("Du kämpfst mit ${hero.name}")
+                    println("Welche Attacke willst du ausführen?")
+                    for ((index, attack) in hero.attacks.withIndex()) {
+                        println("$index. ${attack.name}")
+                    }
+                    var attackChoice: Int? = null
+                    while (attackChoice == null || attackChoice < 0 || attackChoice >= hero.attacks.size) {
+                        val input = readln()
+                        attackChoice = input.toInt()
+                        if (attackChoice < 0 || attackChoice >= hero.attacks.size) {
+                            println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
+                        }
+                    }
+                    if (inFight.contains(korath)){
+                        chooseEnemy(enemyList)
+                        val chosenEnemy = readln().toInt()
+                        if (chosenEnemy <= enemyList.size) {
+                            hero.attackEnemy(inFight[chosenEnemy], hero.attacks[attackChoice])
+                            fightingHero.add(hero)
+                            continueBattle = false
+                        } else {
+                            println("Wähle einen Gegner aus!")
+                        }
+                    } else {
+                        hero.attackEnemy(bossRonan, hero.attacks[attackChoice])
                         fightingHero.add(hero)
                         continueBattle = false
-                    }
-                    else -> {
-                        println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
                     }
                 }
             }
@@ -281,6 +326,7 @@ fun chooseEnemy(enemys: MutableList<Enemy>) {
 }
 
 fun main() {
+    println()
     for (hero in listHeros) {
         bossRonan.EndgegnerinFight(bossRonan)
         while (inFight.isNotEmpty() && listHeros.isNotEmpty()) {
