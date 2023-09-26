@@ -1,5 +1,7 @@
 package heros
 
+import colors.GuardiansColors
+
 class HeroGroot(
     name: String,
     lp: Int,
@@ -8,4 +10,5 @@ class HeroGroot(
     armorReduction: Int,
     speed: Int,
     attacks: MutableList<AttacksHeros>,
-) : Hero(name, lp, lpStandard, armor, armorReduction, speed, attacks) {}
+    colorName: String
+) : Hero(name, lp, lpStandard, armor, armorReduction, speed, attacks, colorName) {}

@@ -4,7 +4,25 @@ import enemy.Enemy
 import enemy.EnemyKorath
 import enemy.EnemyBossRonan
 import heros.*
+import colors.GuardiansColors
 
+// Implementierung der FarbCodes für die Helden
+val colorList = listOf(
+    GuardiansColors.GAMORA.code,
+    GuardiansColors.DRAX.code,
+    GuardiansColors.ROCKET.code,
+    GuardiansColors.GROOT.code,
+    GuardiansColors.PETER.code
+)
+
+// Implementierung der FarbCodes für die Gegner
+val enemyColorList = listOf(
+    GuardiansColors.RONAN.code,
+    GuardiansColors.KORATH.code,
+)
+
+// Implementierung der FarbCodes für Reset
+val resetColor = GuardiansColors.RESET.code
 
 // Tote Helden werden hier eingespeichert und aus der ursprünglichen Liste "ListHeros" gelöscht
 var deadHeros: MutableList<Hero> = mutableListOf()
@@ -56,11 +74,11 @@ var attacksPeter: MutableList<AttacksHeros> = mutableListOf(
 // Schnelligkeit -> der schnellste Held greift zuerst an
 // Attacken-Liste für den Helden
 
-var gamora: HeroDraxAndGamora = HeroDraxAndGamora("Gamora", 3200, 3200, 400, 400, 135, attacksGamora)
-var drax: HeroDraxAndGamora = HeroDraxAndGamora("Drax", 4500, 4500, 550, 550, 100, attacksDrax)
-var rocket: HeroRocket = HeroRocket("Rocket", 400, 400, 1400, 1400, 145, attacksRocket)
-var groot: HeroGroot = HeroGroot("Groot", 5000, 5000, 5000, 5000, 80, attacksGroot)
-var peter: HeroPeter = HeroPeter("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, attacksPeter)
+var gamora: HeroDraxAndGamora = HeroDraxAndGamora("Gamora", 3200, 3200, 400, 400, 135, attacksGamora, colorList[0])
+var drax: HeroDraxAndGamora = HeroDraxAndGamora("Drax", 4500, 4500, 550, 550, 100, attacksDrax, colorList[1])
+var rocket: HeroRocket = HeroRocket("Rocket", 400, 400, 1400, 1400, 145, attacksRocket, colorList[2])
+var groot: HeroGroot = HeroGroot("Groot", 5000, 5000, 5000, 5000, 80, attacksGroot, colorList[3])
+var peter: HeroPeter = HeroPeter("Peter Quill (Star-Lord)", 800, 800, 2300, 2300, 140, attacksPeter, colorList[4])
 
 // Zusammenfassung der Helden in eine Liste -> nötig für Spiellogik
 var listHeros = mutableListOf(gamora, drax, rocket, groot, peter)
@@ -111,13 +129,15 @@ var bossRonan: EnemyBossRonan =
     EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, attacksBossRonan,
         korathInFight = false,
         korathAlive = true,
-        inFight = inFight
+        inFight = inFight,
+        colorName = enemyColorList[0]
     )
 var korath: EnemyKorath =
     EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, attacksKorath,
         korathInFight = false,
         korathAlive = true,
-        inFight = inFight
+        inFight = inFight,
+        colorName = enemyColorList[1]
     )
 
 // Zusammenfassung der Gegner in eine Liste -> nötig für Spiellogik
@@ -223,7 +243,7 @@ fun fightHeros() {
                 var playerAction: Int? = null
                 // wenn der Beutel nicht leer ist und noch Gegner leben wird die auswahl gegeben
                 if (!isBagEmpty && inFight.isNotEmpty()) {
-                    println("Es ist ${hero.name}'s Zug.")
+                    println("Es ist ${hero.colorName}${hero.name}'s$resetColor Zug.")
                     println("Was möchtest du tun?")
                     println("1. Kämpfen und Attacke wählen")
                     println("2. Den Beutel nutzen")
@@ -243,8 +263,9 @@ fun fightHeros() {
                     when (playerAction) {
                         1 -> {
                             // auswahl 1 -> attackieren eines Gegners sofern dieser lebt
-                            println("Du kämpfst mit ${hero.name}")
+                            println("Du kämpfst mit ${hero.colorName}${hero.name}$resetColor")
                             println("Welche Attacke willst du ausführen?")
+                            println()
                             // gibt mögliche Attacken aus
                             for ((index, attack) in hero.attacks.withIndex()) {
                                 println("$index. ${attack.name}")
@@ -323,7 +344,7 @@ fun fightHeros() {
                     }
                 // falls Beutel leer ist wird direkt zum Kampf gesprungen
                 } else {
-                    println("Du kämpfst mit ${hero.name}")
+                    println("Du kämpfst mit ${hero.colorName}${hero.name}$resetColor")
                     println("Welche Attacke willst du ausführen?")
                     // auflistung der möglichen Attacken
                     for ((index, attack) in hero.attacks.withIndex()) {
@@ -516,23 +537,3 @@ fun main() {
         }
     }
 }
-
-
-//Textfarben:
-//Schwarzer Text: \u001B[30m
-//Rot: \u001B[31m
-//Grün: \u001B[32m
-//Gelb: \u001B[33m
-//Blau: \u001B[34m
-//Magenta: \u001B[35m
-//Cyan: \u001B[36m
-//Weiß: \u001B[37m
-//Hintergrundfarben:
-//Schwarzer Hintergrund: \u001B[40m
-//Rot: \u001B[41m
-//Grün: \u001B[42m
-//Gelb: \u001B[43m
-//Blau: \u001B[44m
-//Magenta: \u001B[45m
-//Cyan: \u001B[46m
-//Weiß: \u001B[47m

@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="14.3">
+    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="14.4">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/colors/Colors.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/AttacksHeros.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/AttacksHeros.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/enemy/Enemy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/Enemy.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/enemy/EnemyBossRonan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/EnemyBossRonan.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/enemy/EnemyKorath.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/EnemyKorath.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/Hero.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/Hero.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroDraxAndGamora.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroDraxAndGamora.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroGroot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroGroot.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroPeter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroPeter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroRocket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroRocket.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/test.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -277,7 +286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695734597578</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="14.4">
+      <option name="closed" value="true" />
+      <created>1695738783387</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1695738783387</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -311,6 +328,7 @@
     <MESSAGE value="14.1" />
     <MESSAGE value="14.2" />
     <MESSAGE value="14.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="14.3" />
+    <MESSAGE value="14.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="14.4" />
   </component>
 </project>

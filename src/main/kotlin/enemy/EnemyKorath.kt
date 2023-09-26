@@ -9,4 +9,5 @@ class EnemyKorath(
     korathInFight: Boolean,
     korathAlive: Boolean,
     inFight: MutableList<Enemy>,
-) : Enemy(name, lp, armor, armorReduction, attacks, korathInFight, korathAlive, inFight)
+    colorName: String
+) : Enemy(name, lp, armor, armorReduction, attacks, korathInFight, korathAlive, inFight, colorName)
