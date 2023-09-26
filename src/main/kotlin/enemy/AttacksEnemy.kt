@@ -1,4 +1,4 @@
 package enemy
 
-class AttacksEnemy(var name: String, var healOrDamage: Int?) {
+class AttacksEnemy(var name: String, var damage: Int?) {
 }

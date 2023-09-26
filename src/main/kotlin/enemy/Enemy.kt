@@ -13,7 +13,7 @@ open class Enemy(
 ) {
     fun shockWave(heroes: MutableList<Hero>, deadHeros: MutableList<Hero>) {
         for (hero in heroes) {
-            val damage: Int = this.attacks[0].healOrDamage!!
+            val damage: Int = this.attacks[0].damage!!
             println("${this.name} hat ${hero.name} um 300 Lebenspunkte verletzt!!")
             println("${hero.name} hat noch ${hero.lp} Lebenspunkte")
             if (hero.lp < damage) {
@@ -41,7 +41,7 @@ open class Enemy(
 
     fun attackSimple(heroes: MutableList<Hero>, attack: AttacksEnemy, deadHeros: MutableList<Hero>) {
         val randomHero = heroes.random()
-        if (attack.healOrDamage!! >= randomHero.lp) {
+        if (attack.damage!! >= randomHero.lp) {
             randomHero.lp = 0
             println("${this.name} hat ${attack.name} angewand und damit ${randomHero.name} besiegt")
             println("${randomHero.name} ist besiegt!")
@@ -54,74 +54,74 @@ open class Enemy(
                 println("${randomHero.name} hat $remainingArmorPercent % Rüstung")
             }
             if (remainingArmorPercent in 90..100) {
-                val realDamage = (attack.healOrDamage!! / 100) * 10
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 10
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 80..90) {
-                val realDamage = (attack.healOrDamage!! / 100) * 20
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 20
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 70..80) {
-                val realDamage = (attack.healOrDamage!! / 100) * 30
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 30
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 60..70) {
-                val realDamage = (attack.healOrDamage!! / 100) * 40
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 40
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 50..60) {
-                val realDamage = (attack.healOrDamage!! / 100) * 50
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 50
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 40..50) {
-                val realDamage = (attack.healOrDamage!! / 100) * 60
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 60
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 30..40) {
-                val realDamage = (attack.healOrDamage!! / 100) * 70
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 70
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 20..30) {
-                val realDamage = (attack.healOrDamage!! / 100) * 80
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 80
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent in 10..20) {
-                val realDamage = (attack.healOrDamage!! / 100) * 90
-                randomHero.armorReduction -= attack.healOrDamage!!
+                val realDamage = (attack.damage!! / 100) * 90
+                randomHero.armorReduction -= attack.damage!!
                 randomHero.lp -= realDamage
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Rüstungspunkte und $realDamage Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             } else if (remainingArmorPercent < 10) {
                 randomHero.armor = 0
-                randomHero.lp -= attack.healOrDamage!!
+                randomHero.lp -= attack.damage!!
                 println("${randomHero.name} hat keine schützende Rüstung mehr! Der Schaden geht nun komplett auf die Lebenspunkte!")
                 println("${this.name} hat ${attack.name} angewand!")
-                println("${randomHero.name} verliert ${attack.healOrDamage} Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
+                println("${randomHero.name} verliert ${attack.damage} Lebenspunkte und hat noch ${randomHero.lp} Lebenspunkte!")
                 println()
             }
         }
