@@ -6,6 +6,12 @@ import enemy.EnemyBossRonan
 import heros.*
 import colors.GuardiansColors
 
+
+
+
+// Ideen für morgen:
+//
+
 // Implementierung der FarbCodes für die Helden
 val colorList = listOf(
     GuardiansColors.GAMORA.code,
