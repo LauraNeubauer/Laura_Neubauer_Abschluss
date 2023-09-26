@@ -29,7 +29,7 @@ open class Hero(
         // Schadenspunkte übersteigen die Lebenspunkte -> Held ist tot
         // wird von der Liste der kämpfenden Gegnern übertragen in die Liste der toten Gegner
         if (attacke.damage!! > enemy.lp) {
-            println("${this.colorName}${this.name} hat ${attacke.name} angewand und damit $resetColor${enemy.colorName}${enemy.name} ${this.colorName}besiegt$resetColor")
+            println("${this.colorName}${this.name}${resetColor} hat ${attacke.name} angewand und damit ${enemy.colorName}${enemy.name} ${resetColor}besiegt")
             println("${enemy.colorName}${enemy.name} ist besiegt!$resetColor")
             enemy.lp = 0
             println()

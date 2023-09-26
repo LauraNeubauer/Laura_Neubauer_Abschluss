@@ -530,7 +530,7 @@ fun printEnemys(enemys: MutableList<Enemy>) {
     }
 }
 
-// Main mit schleife ( beendigung wenn -> Alle Gegner tot oder alle Helden tot
+// Main mit schleife ( beendigung wenn -> Alle Gegner tot oder alle Helden tot )
 fun main() {
     println()
     bossRonan.ronanInFight(bossRonan)
