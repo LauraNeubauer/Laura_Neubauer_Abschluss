@@ -5,15 +5,6 @@ import enemy.EnemyKorath
 import enemy.EnemyBossRonan
 import Heros.*
 
-// To-Do:
-//          - Auswahl Gegner - 3 eingeben: gibt aus: "Wähle einen Gegner aus" aber nimmt keine neue auswahl an
-//          - Auswahl Gegner - 2 eingeben: gibt aus: kämpft einfach gegen korath ohne nach richtigem index zu fragen
-//          - Attackenauswahl: nichts eingegeben / enter - numberformatexeption
-//          - Attackenauswahl: StringExeption nach Buchstabeneingabe
-//          - Beutel: nichts eingegeben / enter - numberformatexeption
-//          - Gegnerauswahl: nichts eingegeben / enter - numberformatexeption
-
-
 var deadHeros: MutableList<Hero> = mutableListOf()
 
 var attacksGamora: MutableList<AttacksHeros> = mutableListOf(
@@ -79,9 +70,9 @@ var inFight: MutableList<Enemy> = mutableListOf()
 var deadEnemy: MutableList<Enemy> = mutableListOf()
 
 var bossRonan: EnemyBossRonan =
-    EnemyBossRonan("Ronan the Accuser", 2000, 3500, 2500, 2500, attacksBossRonan, false, true, inFight, deadEnemy)
+    EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, 2500, attacksBossRonan, false, true, inFight, deadEnemy)
 var korath: EnemyKorath =
-    EnemyKorath("Korath the Pursuer", 1000, 3500, 1500, 1500, attacksKorath, false, true, inFight, deadEnemy)
+    EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, 1500, attacksKorath, false, true, inFight, deadEnemy)
 
 var enemyList: MutableList<Enemy> = mutableListOf(bossRonan, korath)
 

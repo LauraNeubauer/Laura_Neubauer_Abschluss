@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="14.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/AttacksEnemys.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/AttacksEnemys.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/Enemy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/Enemy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/EnemyBossRonan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/EnemyBossRonan.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Enemy/EnemyKorath.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/EnemyKorath.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Heros/Hero.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Heros/Hero.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +23,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "LauraNeubauer"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LauraNeubauer&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -246,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695722389407</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="14.1">
+      <option name="closed" value="true" />
+      <created>1695726152682</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1695726152682</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
