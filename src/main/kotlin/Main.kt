@@ -70,9 +70,17 @@ var inFight: MutableList<Enemy> = mutableListOf()
 var deadEnemy: MutableList<Enemy> = mutableListOf()
 
 var bossRonan: EnemyBossRonan =
-    EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, attacksBossRonan, false, true, inFight)
+    EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, attacksBossRonan,
+        korathInFight = false,
+        korathAlive = true,
+        inFight = inFight
+    )
 var korath: EnemyKorath =
-    EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, attacksKorath, false, true, inFight)
+    EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, attacksKorath,
+        korathInFight = false,
+        korathAlive = true,
+        inFight = inFight
+    )
 
 var enemyList: MutableList<Enemy> = mutableListOf(bossRonan, korath)
 
