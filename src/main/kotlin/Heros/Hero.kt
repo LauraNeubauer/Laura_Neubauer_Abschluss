@@ -13,9 +13,10 @@ open class Hero(
 ) {
     fun attackEnemy(enemy: Enemy, attacke: AttacksHeros) {
         if (attacke.healOrdamage!! > enemy.lp) {
-            enemy.lp = 0
             println("${this.name} hat ${attacke.name} angewand und damit ${enemy.name} besiegt")
             println("${enemy.name} ist besiegt!")
+            enemy.lp = 0
+            println()
         } else {
             val remainingArmorPercent = if (enemy.armor != 0) (enemy.armorReduction * 100) / enemy.armor else 0
             if (remainingArmorPercent > 0) {
