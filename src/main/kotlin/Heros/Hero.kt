@@ -11,12 +11,14 @@ open class Hero(
     var speed: Int,
     var attacks: MutableList<AttacksHeros>,
 ) {
-    fun attackEnemy(enemy: Enemy, attacke: AttacksHeros) {
+    fun attackEnemy(enemy: Enemy, attacke: AttacksHeros, dead: MutableList<Enemy>, inFight: MutableList<Enemy>) {
         if (attacke.healOrdamage!! > enemy.lp) {
             println("${this.name} hat ${attacke.name} angewand und damit ${enemy.name} besiegt")
             println("${enemy.name} ist besiegt!")
             enemy.lp = 0
             println()
+            dead.add(enemy)
+            inFight.remove(enemy)
         } else {
             val remainingArmorPercent = if (enemy.armor != 0) (enemy.armorReduction * 100) / enemy.armor else 0
             if (remainingArmorPercent > 0) {
