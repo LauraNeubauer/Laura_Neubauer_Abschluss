@@ -1,4 +1,4 @@
-package Enemy
+package enemy
 
 class EnemyKorath(
     name: String,

@@ -1,8 +1,8 @@
 import BagClass.Bag
-import Enemy.AttacksEnemys
-import Enemy.Enemy
-import Enemy.EnemyKorath
-import Enemy.EnemyBossRonan
+import enemy.AttacksEnemys
+import enemy.Enemy
+import enemy.EnemyKorath
+import enemy.EnemyBossRonan
 import Heros.*
 
 // To-Do:

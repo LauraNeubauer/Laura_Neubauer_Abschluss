@@ -1,6 +1,6 @@
 package Heros
 
-import Enemy.Enemy
+import enemy.Enemy
 
 open class Hero(
     var name: String,

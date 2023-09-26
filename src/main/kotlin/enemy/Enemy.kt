@@ -1,4 +1,4 @@
-package Enemy
+package enemy
 import Heros.Hero
 
 open class Enemy(
