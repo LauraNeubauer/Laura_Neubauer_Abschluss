@@ -1,25 +1,22 @@
 package enemy
-import Heros.Hero
+import heros.Hero
 
 open class Enemy(
     var name: String,
     var lp: Int,
-    var lpStandart: Int,
     var armor: Int,
     var armorReduction: Int,
-    var attaken: MutableList<AttacksEnemys> = mutableListOf(),
+    var attacks: MutableList<AttacksEnemy> = mutableListOf(),
     var korathIsInFight: Boolean,
     var korathIsAlive: Boolean,
-    var inFight: MutableList<Enemy> = mutableListOf(),
-    var dead: MutableList<Enemy> = mutableListOf()
+    private var inFight: MutableList<Enemy> = mutableListOf(),
 ) {
     fun shockWave(heroes: MutableList<Hero>, deadHeros: MutableList<Hero>) {
         for (hero in heroes) {
-            val damage: Int = this.attaken[0].healOrDamage!!
+            val damage: Int = this.attacks[0].healOrDamage!!
             println("${this.name} hat ${hero.name} um 300 Lebenspunkte verletzt!!")
             println("${hero.name} hat noch ${hero.lp} Lebenspunkte")
             if (hero.lp < damage) {
-                hero.lp = 0
                 heroes.remove(hero)
                 deadHeros.add(hero)
             } else {
@@ -42,7 +39,7 @@ open class Enemy(
         inFight.add(korath)
     }
 
-    fun attackSimple(heroes: MutableList<Hero>, attack: AttacksEnemys, deadHeros: MutableList<Hero>) {
+    fun attackSimple(heroes: MutableList<Hero>, attack: AttacksEnemy, deadHeros: MutableList<Hero>) {
         val randomHero = heroes.random()
         if (attack.healOrDamage!! >= randomHero.lp) {
             randomHero.lp = 0

@@ -1,12 +1,12 @@
-package Heros
+package heros
 
-class HeroPeter(
+class HeroRocket(
     name: String,
     lp: Int,
-    lpReduction: Int,
+    lpStandard: Int,
     armor: Int,
     armorReduction: Int,
     speed: Int,
     attacks: MutableList<AttacksHeros>,
-) : Hero(name, lp, lpReduction, armor, armorReduction, speed, attacks) {
+) : Hero(name, lp, lpStandard, armor, armorReduction, speed, attacks) {
 }

@@ -1,4 +1,4 @@
-package BagClass
+package bagClass
 
 class Bag(
     var name: String,

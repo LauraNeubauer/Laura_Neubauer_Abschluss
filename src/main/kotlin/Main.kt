@@ -1,9 +1,9 @@
-import BagClass.Bag
-import enemy.AttacksEnemys
+import bagClass.Bag
+import enemy.AttacksEnemy
 import enemy.Enemy
 import enemy.EnemyKorath
 import enemy.EnemyBossRonan
-import Heros.*
+import heros.*
 
 var deadHeros: MutableList<Hero> = mutableListOf()
 
@@ -51,28 +51,28 @@ var bag: MutableList<Bag> = mutableListOf(
     Bag("Groot's Vitaltrunk", 10, 5),
 )
 
-var attacksBossRonan: MutableList<AttacksEnemys> = mutableListOf(
-    AttacksEnemys("Hammer-Schock-Welle", 300),  //0
-    AttacksEnemys("Packen", 100),               //1
-    AttacksEnemys("Schuss", 350),               //2
-    AttacksEnemys("Tritt", 440),                //3
-    AttacksEnemys("Hammerhieb", 700),           //4
-    AttacksEnemys("Beschwören", null),          //5
+var attacksBossRonan: MutableList<AttacksEnemy> = mutableListOf(
+    AttacksEnemy("Hammer-Schock-Welle", 300),  //0
+    AttacksEnemy("Packen", 100),               //1
+    AttacksEnemy("Schuss", 350),               //2
+    AttacksEnemy("Tritt", 440),                //3
+    AttacksEnemy("Hammerhieb", 700),           //4
+    AttacksEnemy("Beschwören", null),          //5
 )
-var attacksKorath: MutableList<AttacksEnemys> = mutableListOf(
-    AttacksEnemys("Tritt", 440),                //0
-    AttacksEnemys("Schuss", 350),               //1
-    AttacksEnemys("Doppelschuss", 350),         //2
-    AttacksEnemys("Feuer", 350),                //3
+var attacksKorath: MutableList<AttacksEnemy> = mutableListOf(
+    AttacksEnemy("Tritt", 440),                //0
+    AttacksEnemy("Schuss", 350),               //1
+    AttacksEnemy("Doppelschuss", 350),         //2
+    AttacksEnemy("Feuer", 350),                //3
 )
 
 var inFight: MutableList<Enemy> = mutableListOf()
 var deadEnemy: MutableList<Enemy> = mutableListOf()
 
 var bossRonan: EnemyBossRonan =
-    EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, 2500, attacksBossRonan, false, true, inFight, deadEnemy)
+    EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, attacksBossRonan, false, true, inFight)
 var korath: EnemyKorath =
-    EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, 1500, attacksKorath, false, true, inFight, deadEnemy)
+    EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, attacksKorath, false, true, inFight)
 
 var enemyList: MutableList<Enemy> = mutableListOf(bossRonan, korath)
 
@@ -95,10 +95,10 @@ fun usingBag(hero: Hero) {
                         println("${hero.name} hat ${hero.lp} Lebenspunkte")
                         println("${hero.name} trinkt ${selectedItem.name}!")
                         println("${hero.name} Lebenspunkte werden um die Hälfte seiner ursprünglichen Lebenspunkte geheilt")
-                        if (hero.lp < (hero.lpStandart / 2)) {
-                            hero.lp += (hero.lpStandart / selectedItem.value)
+                        if (hero.lp < (hero.lpStandard / 2)) {
+                            hero.lp += (hero.lpStandard / selectedItem.value)
                         } else {
-                            val fullLp = hero.lpStandart
+                            val fullLp = hero.lpStandard
                             hero.lp = fullLp
                         }
                         println("${hero.name} hat nun ${hero.lp} Lebenspunkte!")
@@ -115,10 +115,10 @@ fun usingBag(hero: Hero) {
                         println("${hero.name}'s Attacken werden stärker um 10%")
                         println()
                         for (heroAttack in hero.attacks) {
-                            val plus = (heroAttack.healOrdamage!! / 100) * 10
-                            print("${heroAttack.name}'s Schaden: ${heroAttack.healOrdamage} steigt auf ")
-                            heroAttack.healOrdamage = heroAttack.healOrdamage!! + plus
-                            println("${heroAttack.healOrdamage}")
+                            val plus = (heroAttack.healOrDamage!! / 100) * 10
+                            print("${heroAttack.name}'s Schaden: ${heroAttack.healOrDamage} steigt auf ")
+                            heroAttack.healOrDamage = heroAttack.healOrDamage!! + plus
+                            println("${heroAttack.healOrDamage}")
                         }
                         println()
                         selectedItem.amount -= 1
@@ -164,7 +164,7 @@ fun fightHeros() {
                             if (playerAction < 1 || playerAction > 2) {
                                 println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
                             }
-                        } catch (e: NumberFormatException) {
+                        } catch (e: Exception) {
                             println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
                         }
                     }
@@ -176,25 +176,39 @@ fun fightHeros() {
                                 println("$index. ${attack.name}")
                             }
                             var attackChoice: Int? = null
-                            while (attackChoice == null || attackChoice < 0 || attackChoice >= hero.attacks.size) {
+                            while (attackChoice == null || attackChoice < 0 || attackChoice > 3) {
                                 val input = readln()
-                                attackChoice = input.toInt()
-                                if (attackChoice < 0 || attackChoice >= hero.attacks.size) {
-                                    println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
+                                try {
+                                    attackChoice = input.toInt()
+
+                                    if (attackChoice < 0 || attackChoice > 3) {
+                                        println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
+                                    }
+                                } catch (e: Exception) {
+                                    println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
                                 }
                             }
                             if (inFight.contains(korath) && inFight.contains(bossRonan)) {
                                 chooseEnemy(inFight)
-                                val chosenEnemy = readln().toInt()
-                                if (chosenEnemy <= enemyList.size) {
-                                    hero.attackEnemy(
-                                        inFight[chosenEnemy],
-                                        hero.attacks[attackChoice],
-                                        deadEnemy,
-                                        inFight
-                                    )
-                                    fightingHero.add(hero)
-                                    continueBattle = false
+                                var chosenEnemy : Int? = null
+                                while ((chosenEnemy == null) || (chosenEnemy < 0) || (chosenEnemy > 1)){
+                                    try {
+                                        chosenEnemy = readln().toInt()
+                                        if (chosenEnemy in 0..1) {
+                                            hero.attackEnemy(
+                                                inFight[chosenEnemy],
+                                                hero.attacks[attackChoice],
+                                                deadEnemy,
+                                                inFight
+                                            )
+                                            fightingHero.add(hero)
+                                            continueBattle = false
+                                        } else {
+                                            println("Bitte gebe eine gültige Zahl ein!")
+                                        }
+                                    } catch (e: Exception) {
+                                        println("Bitte gebe eine gültige Zahl ein!")
+                                    }
                                 }
                             } else if (inFight.contains(korath) && !inFight.contains(bossRonan)){
                                 hero.attackEnemy(korath, hero.attacks[attackChoice], deadEnemy, inFight)
@@ -225,20 +239,37 @@ fun fightHeros() {
                         println("$index. ${attack.name}")
                     }
                     var attackChoice: Int? = null
-                    while (attackChoice == null || attackChoice < 0 || attackChoice >= hero.attacks.size) {
-                        val input = readln()
-                        attackChoice = input.toInt()
-                        if (attackChoice < 0 || attackChoice >= hero.attacks.size) {
-                            println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Attacken.")
+                    while (attackChoice == null || attackChoice < 0 || attackChoice > 3) {
+                        try {
+                            val input = readln()
+                            attackChoice = input.toInt()
+
+                            if (attackChoice < 0 || attackChoice > 3) {
+                                println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
+                            }
+                        } catch (e: Exception) {
+                            println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
                         }
                     }
                     if (inFight.contains(korath) && inFight.contains(bossRonan)) {
                         chooseEnemy(enemyList)
                         val chosenEnemy = readln().toInt()
-                        if (chosenEnemy <= enemyList.size) {
-                            hero.attackEnemy(inFight[chosenEnemy], hero.attacks[attackChoice], deadEnemy, inFight)
-                            fightingHero.add(hero)
-                            continueBattle = false
+                        var attackChoice2: Int? = null
+                        while (attackChoice2 == null || attackChoice2 < 0 || attackChoice2 > 3) {
+                            val input = readln()
+                            try {
+                                attackChoice2 = input.toInt()
+                                if (chosenEnemy <= enemyList.size) {
+                                    hero.attackEnemy(inFight[chosenEnemy], hero.attacks[attackChoice2], deadEnemy, inFight)
+                                    fightingHero.add(hero)
+                                    continueBattle = false
+                                }
+                                if (attackChoice2 < 0 || attackChoice2 > 3) {
+                                    println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
+                                }
+                            } catch (e: Exception) {
+                                println("Ungültige Eingabe. Bitte gib eine gültige Zahl ein.")
+                            }
                         }
                     } else if (inFight.contains(korath)){
                         hero.attackEnemy(korath, hero.attacks[attackChoice], deadEnemy, inFight)
@@ -263,75 +294,75 @@ fun fightEnemy() {
     // 2 = Schuss ( simple Attacke )
     if (randomAttackRonan == 2) {
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[2], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[2], deadHeros)
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[2], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[2], deadHeros)
         } else {
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
         // 0 = Hammer-Schock-Welle ( alle Heros werden attackiert )
     } else if (randomAttackRonan == 0) {
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
             bossRonan.shockWave(listHeros, deadHeros)
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)){
             bossRonan.shockWave(listHeros, deadHeros)
         } else {
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
         // 1 = Packen ( simple Attacke )
     } else if (randomAttackRonan == 1) {
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[1], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[1], deadHeros)
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)){
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[1], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[1], deadHeros)
         } else {
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
         // 3 = Tritt ( simple Attacke )
     } else if (randomAttackRonan == 3) {
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[3], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[3], deadHeros)
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)){
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[3], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[3], deadHeros)
         } else {
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
         // 4 = Hammerhieb ( simple Attacke )
     } else if (randomAttackRonan == 4) {
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[4], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[4], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
         } else {
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
         // 5 = Beschwören ( Korath )
     } else if (randomAttackRonan == 5) {
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
             val alternative = (0..4).random()
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[alternative], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!bossRonan.korathIsInFight && bossRonan.korathIsAlive) {
             bossRonan.putKorathInFight(korath)
             bossRonan.korathIsInFight = true
             println()
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (inFight.contains(korath) && !inFight.contains(bossRonan)) {
-            korath.attackSimple(listHeros, korath.attaken[randomAttackKorath], deadHeros)
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else {
             val alternative = (0..4).random()
-            bossRonan.attackSimple(listHeros, bossRonan.attaken[alternative], deadHeros)
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
         }
     }
 }
