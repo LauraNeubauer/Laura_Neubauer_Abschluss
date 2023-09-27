@@ -61,7 +61,7 @@ var attacksGroot: MutableList<AttacksHeros> = mutableListOf(
 var attacksPeter: MutableList<AttacksHeros> = mutableListOf(
     AttacksHeros("Blast", 500),
     AttacksHeros("Manipulieren", 300),
-    AttacksHeros("Jet-Pack", 500),
+    AttacksHeros("Ablenken", 500),
     AttacksHeros("Doppelschuss", 500)
 )
 
@@ -131,14 +131,18 @@ var bossRonan: EnemyBossRonan =
         korathInFight = false,
         korathAlive = true,
         inFight = inFight,
-        colorName = enemyColorList[0]
+        colorName = enemyColorList[0],
+        distracted = false,
+        wasDistracted = false
     )
 var korath: EnemyKorath =
     EnemyKorath("Korath the Pursuer", 7000, 3500, 1500, attacksKorath,
         korathInFight = false,
         korathAlive = true,
         inFight = inFight,
-        colorName = enemyColorList[1]
+        colorName = enemyColorList[1],
+        distracted = false,
+        wasDistracted = false
     )
 
 // Zusammenfassung der Gegner in eine Liste -> nötig für Spiellogik
@@ -224,6 +228,8 @@ fun usingBag(hero: Hero) {
 
 // Angriffe der Helden
 fun fightHeros() {
+    bossRonan.distracted = false
+    korath.distracted = false
     // Erstellt Liste für gekämpfte Helden in der Runde
     val fightingHero = mutableListOf<Hero>()
     var continueBattle = true
@@ -292,7 +298,13 @@ fun fightHeros() {
 
                             // -----> 2
                             if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-                                if (hero == peter && (attackChoice == 3)) {
+                                if (hero == peter && (attackChoice == 2)) {
+                                    peter.distract(bossRonan)
+                                    if (!bossRonan.wasDistracted) {
+                                        bossRonan.distracted = true
+                                        bossRonan.wasDistracted = true
+                                    }
+                                } else if (hero == peter && (attackChoice == 3)) {
                                     hero.doubleAttack(inFight, hero.attacks[attackChoice], deadEnemy, inFight)
                                 } else {
                                     // auswahl des Gegners wird gegeben
@@ -336,7 +348,13 @@ fun fightHeros() {
                                 }
                             // -----> 1
                             } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
-                                if (hero == listHeros[3] && (attackChoice == 2)) {
+                                if (hero == peter && (attackChoice == 2)) {
+                                    peter.distract(bossRonan)
+                                    if (!bossRonan.wasDistracted) {
+                                        bossRonan.distracted = true
+                                        bossRonan.wasDistracted = true
+                                    }
+                                } else if (hero == listHeros[3] && (attackChoice == 2)) {
                                     groot.armorDestroy(bossRonan)
                                 } else {
                                     hero.attackEnemy(bossRonan, hero.attacks[attackChoice], deadEnemy, inFight)
@@ -427,6 +445,7 @@ fun fightHeros() {
 }
 
 // Angriffe der Gegner
+// Ronan kämpft nur wenn er nicht abgelenkt ist
 fun fightEnemy() {
     storyLine2()
     println()
@@ -443,12 +462,17 @@ fun fightEnemy() {
     if (randomAttackRonan == 2) {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[2], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[2], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[2], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[2], deadHeros)
+                println()
+            }
         // -----> 3 Boss gestorben und Helfer im Kampf
         } else {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
@@ -457,12 +481,17 @@ fun fightEnemy() {
     } else if (randomAttackRonan == 0) {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.shockWave(listHeros, deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.shockWave(listHeros, deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)){
-            bossRonan.shockWave(listHeros, deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.shockWave(listHeros, deadHeros)
+                println()
+            }
         // -----> 3 Boss gestorben und Helfer im Kampf
         } else {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
@@ -471,12 +500,17 @@ fun fightEnemy() {
     } else if (randomAttackRonan == 1) {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[1], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[1], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)){
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[1], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[1], deadHeros)
+                println()
+            }
         // -----> 3 Boss gestorben und Helfer im Kampf
         } else {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
@@ -485,12 +519,17 @@ fun fightEnemy() {
     } else if (randomAttackRonan == 3) {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[3], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[3], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)){
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[3], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[3], deadHeros)
+                println()
+            }
         // -----> 3 Boss gestorben und Helfer im Kampf
         } else {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
@@ -499,12 +538,17 @@ fun fightEnemy() {
     } else if (randomAttackRonan == 4) {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
             // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
+                println()
+            }
             // -----> 3 Boss gestorben und Helfer im Kampf
         } else {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
@@ -512,21 +556,31 @@ fun fightEnemy() {
     // 6 = HammerBlast
     } else if (randomAttackRonan == 5) {
         if (inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size > 2) {
-            bossRonan.doubleAttack(listHeros, bossRonan.attacks[5], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.doubleAttack(listHeros, bossRonan.attacks[5], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size > 2) {
-            bossRonan.doubleAttack(listHeros, bossRonan.attacks[5], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.doubleAttack(listHeros, bossRonan.attacks[5], deadHeros)
+                println()
+            }
         } else if (inFight.contains(korath) && !inFight.contains(bossRonan) && listHeros.size > 2) {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size < 2) {
             val alternative = (0..4).random()
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size < 2) {
             val alternative = (0..4).random()
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+                println()
+            }
         } else if (inFight.contains(korath) && !inFight.contains(bossRonan) && listHeros.size < 2) {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
@@ -535,14 +589,18 @@ fun fightEnemy() {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
             val alternative = (0..4).random()
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören und noch am leben
         } else if (!bossRonan.korathIsInFight && bossRonan.korathIsAlive) {
-            bossRonan.putKorathInFight(korath)
-            bossRonan.korathIsInFight = true
-            println()
+            if (!bossRonan.distracted) {
+                bossRonan.putKorathInFight(korath)
+                bossRonan.korathIsInFight = true
+                println()
+            }
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         // -----> 3 Boss gestorben und Helfer im Kampf
         } else if (inFight.contains(korath) && !inFight.contains(bossRonan)) {
@@ -550,7 +608,10 @@ fun fightEnemy() {
         // -----> 3 Boss im Kampf und helfer tot
         } else {
             val alternative = (0..4).random()
-            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+            if (!bossRonan.distracted) {
+                bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+                println()
+            }
         }
     }
 }

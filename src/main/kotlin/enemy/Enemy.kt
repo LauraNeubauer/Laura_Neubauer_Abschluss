@@ -22,7 +22,9 @@ open class Enemy(
     var korathIsInFight: Boolean,
     var korathIsAlive: Boolean,
     private var inFight: MutableList<Enemy> = mutableListOf(),
-    val colorName: String
+    val colorName: String,
+    var distracted: Boolean,
+    var wasDistracted: Boolean
 ) {
 
     // Funktion für die Attacke der Schock-Welle

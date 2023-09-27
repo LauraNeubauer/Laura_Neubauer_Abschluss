@@ -23,6 +23,8 @@ class HeroGroot(
     fun armorDestroy(enemy : Enemy) {
 
         if (enemy.armorReduction > 50){
+            println("ICH BIN ${this.colorName}GROOT!${resetColor}")
+            println()
             println("${this.colorName}Groot's${resetColor} Äste verlängern sich und reichen bis unter die Rüstung von ${enemy.colorName}${enemy.name}${resetColor}")
             println("Powww! Die Rüstung fliegt in alle Richtungen und ${enemy.colorName}${enemy.name}${resetColor} ist fast Schutzlos!")
             enemy.armorReduction = 50
