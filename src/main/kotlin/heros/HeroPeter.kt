@@ -14,6 +14,9 @@ class HeroPeter(
     colorName: String
 ) : Hero(name, lp, lpStandard, armor, armorReduction, speed, attacks, colorName) {
 
+
+    // Lenkt Ronan ab und lässt ihn eine Runde aussetzen
+    // Nur einmal möglich
     fun distract(enemy: Enemy){
         println("${this.colorName}${this.name}$resetColor fängt an zu singen:")
         println()
