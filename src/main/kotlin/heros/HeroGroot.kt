@@ -16,6 +16,10 @@ class HeroGroot(
     colorName: String
 ) : Hero(name, lp, lpStandard, armor, armorReduction, speed, attacks, colorName) {
 
+
+
+    // Funktion zum Entfernen aller Rüstungspunkte bis auf 50
+    // WEnn die Rüstung bereits bei 0 liegt, verletzt sich Groot selbst...
     fun armorDestroy(enemy : Enemy) {
 
         if (enemy.armorReduction > 50){
@@ -27,7 +31,7 @@ class HeroGroot(
         } else if (enemy.armorReduction <= 0 && this.lp >= 110) {
             println("${enemy.colorName}${enemy.name}${resetColor} hat keine Rüstung zum zerstören...")
             println("${this.colorName}${this.name}${resetColor} verletzt sich selbst...")
-            println("${this.colorName}${this.name}'s${resetColor} Lebenspunkte sinken um 100..")
+            println("${this.colorName}${this.name}'s${resetColor} Lebenspunkte sinken um 100.. auf ${this.lp}")
             this.lp - 100
             println()
         } else if (enemy.armorReduction <= 0 && this.lp <= 100){
