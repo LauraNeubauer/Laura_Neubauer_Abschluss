@@ -6,12 +6,6 @@ import enemy.EnemyBossRonan
 import heros.*
 import colors.GuardiansColors
 
-
-
-
-// Ideen für morgen:
-//
-
 // Implementierung der FarbCodes für die Helden
 val colorList = listOf(
     GuardiansColors.GAMORA.code,
@@ -60,7 +54,7 @@ var attacksRocket: MutableList<AttacksHeros> = mutableListOf(
 var attacksGroot: MutableList<AttacksHeros> = mutableListOf(
     AttacksHeros("Astpfeile", 500),
     AttacksHeros("Peitschenäste", 400),
-    AttacksHeros("Durchbohren", 550),
+    AttacksHeros("Rüstung zerfetzen", null),
     AttacksHeros("Würgen", 400),
 )
 // Attacken von Peter
@@ -107,7 +101,8 @@ var attacksBossRonan: MutableList<AttacksEnemy> = mutableListOf(
     AttacksEnemy("Schuss", 350),               //2
     AttacksEnemy("Tritt", 440),                //3
     AttacksEnemy("Hammerhieb", 700),           //4
-    AttacksEnemy("Beschwören", null),          //5
+    AttacksEnemy("Hammer-Blast", 700),           //5
+    AttacksEnemy("Beschwören", null),          //6
 )
 
 // Attacken von Boss Korath the Pursuer
@@ -132,14 +127,14 @@ var deadEnemy: MutableList<Enemy> = mutableListOf()
 // Attacken-Liste für den Helden
 
 var bossRonan: EnemyBossRonan =
-    EnemyBossRonan("Ronan the Accuser", 5000, 3500, 2500, attacksBossRonan,
+    EnemyBossRonan("Ronan the Accuser", 12000, 3500, 2500, attacksBossRonan,
         korathInFight = false,
         korathAlive = true,
         inFight = inFight,
         colorName = enemyColorList[0]
     )
 var korath: EnemyKorath =
-    EnemyKorath("Korath the Pursuer", 4000, 3500, 1500, attacksKorath,
+    EnemyKorath("Korath the Pursuer", 7000, 3500, 1500, attacksKorath,
         korathInFight = false,
         korathAlive = true,
         inFight = inFight,
@@ -278,12 +273,12 @@ fun fightHeros() {
                             }
                             //safety -> eingabe der auswahl
                             var attackChoice: Int? = null
-                            while (attackChoice == null || attackChoice < 0 || attackChoice > 3) {
+                            while (attackChoice == null || attackChoice < 0 || attackChoice > 4) {
                                 val input = readln()
                                 try {
                                     attackChoice = input.toInt()
 
-                                    if (attackChoice < 0 || attackChoice > 3) {
+                                    if (attackChoice < 0 || attackChoice > 4) {
                                         println("Ungültige Auswahl. Bitte wähle eine der verfügbaren Optionen.")
                                     }
                                 } catch (e: Exception) {
@@ -297,42 +292,58 @@ fun fightHeros() {
 
                             // -----> 2
                             if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-                                // auswahl des Gegners wird gegeben
-                                printEnemys(inFight)
-                                var chosenEnemy : Int? = null
-                                // safety-auswahl
-                                while ((chosenEnemy == null) || (chosenEnemy < 0) || (chosenEnemy > 1)){
-                                    try {
-                                        chosenEnemy = readln().toInt()
-                                        if (chosenEnemy in 0..1) {
-                                            hero.attackEnemy(
-                                                inFight[chosenEnemy],
-                                                hero.attacks[attackChoice],
-                                                deadEnemy,
-                                                inFight
-                                            )
-                                            fightingHero.add(hero)
-                                            // Schleife wird beendet und nächster Held ist an der reihe falls nicht letzter
-                                            continueBattle = false
-                                        } else {
+                                if (hero == listHeros[4] && (attackChoice == 3)) {
+                                    listHeros[4].doubleAttack(inFight, hero.attacks[attackChoice], deadEnemy, inFight)
+                                } else {
+                                    // auswahl des Gegners wird gegeben
+                                    printEnemys(inFight)
+                                    var chosenEnemy : Int? = null
+                                    // safety-auswahl
+                                    while ((chosenEnemy == null) || (chosenEnemy < 0) || (chosenEnemy > 1)){
+                                        try {
+                                            chosenEnemy = readln().toInt()
+                                            if (chosenEnemy in 0..1) {
+                                                if (hero == listHeros[3] && (attackChoice == 2)) {
+                                                    groot.armorDestroy(inFight[chosenEnemy])
+                                                } else {
+                                                    hero.attackEnemy(
+                                                        inFight[chosenEnemy],
+                                                        hero.attacks[attackChoice],
+                                                        deadEnemy,
+                                                        inFight
+                                                    )
+                                                    fightingHero.add(hero)
+                                                    // Schleife wird beendet und nächster Held ist an der reihe falls nicht letzter
+                                                    continueBattle = false
+                                                }
+                                            } else {
+                                                println("Bitte gebe eine gültige Zahl ein!")
+                                            }
+                                        } catch (e: Exception) {
                                             println("Bitte gebe eine gültige Zahl ein!")
                                         }
-                                    } catch (e: Exception) {
-                                        println("Bitte gebe eine gültige Zahl ein!")
                                     }
                                 }
                             // -----> 3
                             } else if (inFight.contains(korath) && !inFight.contains(bossRonan)){
-                                hero.attackEnemy(korath, hero.attacks[attackChoice], deadEnemy, inFight)
-                                fightingHero.add(hero)
-                                // Schleife wird beendet und nächster Held ist an der reihe falls nicht letzter
-                                continueBattle = false
+                                if (hero == listHeros[3] && (attackChoice == 2)) {
+                                    groot.armorDestroy(korath)
+                                } else {
+                                    hero.attackEnemy(korath, hero.attacks[attackChoice], deadEnemy, inFight)
+                                    fightingHero.add(hero)
+                                    // Schleife wird beendet und nächster Held ist an der reihe falls nicht letzter
+                                    continueBattle = false
+                                }
                             // -----> 1
                             } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
-                                hero.attackEnemy(bossRonan, hero.attacks[attackChoice], deadEnemy, inFight)
-                                fightingHero.add(hero)
-                                // Schleife wird beendet und nächster Held ist an der Reihe falls nicht letzter
-                                continueBattle = false
+                                if (hero == listHeros[3] && (attackChoice == 2)) {
+                                    groot.armorDestroy(bossRonan)
+                                } else {
+                                    hero.attackEnemy(bossRonan, hero.attacks[attackChoice], deadEnemy, inFight)
+                                    fightingHero.add(hero)
+                                    // Schleife wird beendet und nächster Held ist an der Reihe falls nicht letzter
+                                    continueBattle = false
+                                }
                             }
                         }
                         // auswahl 2 -> Beutel wird geöffnet sofern dieser noch inhalt hat
@@ -420,8 +431,8 @@ fun fightEnemy() {
     storyLine2()
     println()
     // Wählt zufällige Attacke aus
-    val randomAttackRonan = (0..5).random()
-    val randomAttackKorath = (0..3).random()
+    val randomAttackRonan = (0..6).random()
+    val randomAttackKorath = (0..4).random()
 
     // 3 Möglichekeiten
     // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
@@ -491,15 +502,36 @@ fun fightEnemy() {
             bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
             println()
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
-        // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
+            // -----> 1 Boss im Kampf und Helfer wurde noch nicht beschwören oder gestorben
         } else if (!inFight.contains(korath) && inFight.contains(bossRonan)) {
             bossRonan.attackSimple(listHeros, bossRonan.attacks[4], deadHeros)
-        // -----> 3 Boss gestorben und Helfer im Kampf
+            // -----> 3 Boss gestorben und Helfer im Kampf
         } else {
             korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
         }
-        // 5 = Beschwören ( Korath )
+    // 6 = HammerBlast
     } else if (randomAttackRonan == 5) {
+        if (inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size > 2) {
+            bossRonan.doubleAttack(listHeros, bossRonan.attacks[5], deadHeros)
+            println()
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
+        } else if (!inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size > 2) {
+            bossRonan.doubleAttack(listHeros, bossRonan.attacks[5], deadHeros)
+        } else if (inFight.contains(korath) && !inFight.contains(bossRonan) && listHeros.size > 2) {
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
+        } else if (inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size < 2) {
+            val alternative = (0..4).random()
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+            println()
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
+        } else if (!inFight.contains(korath) && inFight.contains(bossRonan) && listHeros.size < 2) {
+            val alternative = (0..4).random()
+            bossRonan.attackSimple(listHeros, bossRonan.attacks[alternative], deadHeros)
+        } else if (inFight.contains(korath) && !inFight.contains(bossRonan) && listHeros.size < 2) {
+            korath.attackSimple(listHeros, korath.attacks[randomAttackKorath], deadHeros)
+        }
+    // 6 = Beschwören ( Korath )
+    } else if (randomAttackRonan == 6) {
         // -----> 2 Boss im Kampf und Helfer im Kampf
         if (inFight.contains(korath) && inFight.contains(bossRonan)) {
             val alternative = (0..4).random()

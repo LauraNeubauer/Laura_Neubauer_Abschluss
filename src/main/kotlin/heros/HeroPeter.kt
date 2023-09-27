@@ -1,7 +1,5 @@
 package heros
 
-import colors.GuardiansColors
-
 class HeroPeter(
     name: String,
     lp: Int,

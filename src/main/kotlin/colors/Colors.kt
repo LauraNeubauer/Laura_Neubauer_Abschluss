@@ -1,6 +1,5 @@
 package colors
 
-
 // Farben ausgewählt nach der "Haut"-Farbe der Helden in Guardians of the Galaxy
 // um die Namen schneller zu erkennen und besser unterscheiden zu können.
 enum class GuardiansColors(val code: String) {
@@ -13,4 +12,3 @@ enum class GuardiansColors(val code: String) {
     KORATH("\u001B[38;5;101m"),
     RESET("\u001B[0m");
 }
-

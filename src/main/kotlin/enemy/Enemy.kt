@@ -30,6 +30,9 @@ open class Enemy(
     // Wenn Lebenspunkte unterhalb der verrichteten Schadenspunkte
     // wird der Held aus der KampfListe entfernt und in die Liste der Toten übertragen
     fun shockWave(heroes: MutableList<Hero>, deadHeros: MutableList<Hero>) {
+        println("${this.name} schlägt seinen Hammer auf den Boden und löst damit eine Schockwelle aus die sämliche Rüstungs-" +
+                "punkte ignoriert! ")
+        println()
         for (hero in heroes) {
             val damage: Int = this.attacks[0].damage!!
             println("${this.colorName}${this.name}${resetColor} hat ${hero.colorName}${hero.name}${resetColor} um 300 Lebenspunkte verletzt!!")
@@ -165,4 +168,45 @@ open class Enemy(
             }
         }
     }
+
+    // Simple Attacke mit vorgegebenen Schadenspunkte welche in der MainKt initialisiert wird
+    // zieht die häfte der Schadenspunkte von den Rüstungspunkten ab wenn vorhanden
+    // wenn keine Rüstungspunkte vorhanden -> zieht das 1.5 fache des festen schadens von den Lebenspunkten ab
+    fun doubleAttack(heroes: MutableList<Hero>, attack: AttacksEnemy, deadHeros: MutableList<Hero>) {
+        val hero1 : Hero = heroes.first()
+        val hero2 : Hero = heroes.last()
+        val heroListHammerBlast : MutableList<Hero> = mutableListOf(hero1, hero2)
+        val armorDamage : Int = attack.damage!! / 2
+        val damageWOarmor : Int = attack.damage!! + armorDamage
+        val damage : Int = attack.damage!!
+
+        println("${this.name} schwingt seinen Hammer und trifft ${hero1.colorName}${hero1.name}${resetColor} und ${hero2.colorName}${hero2.name}${resetColor} kritisch...")
+        println()
+        // Für beide Gegner überprüfung nach Rüstungs und Lebenspunkten
+        for (heros in heroListHammerBlast) {
+            if (heros.armorReduction >= armorDamage) {
+                heros.armorReduction -= armorDamage
+                heros.lp -= damage
+                println("Der Hammer zerfetzt ${heros.colorName}${heros.name}'s${resetColor} $armorDamage Rüstungspunkte!")
+                println("Und zieht bei ${heros.colorName}${heros.name}${resetColor} ${attack.damage} Lebenspunkte ab!")
+                println()
+            } else if (heros.lp > damage){
+                heros.armorReduction = 0
+                heros.lp -= damageWOarmor
+                println("Der Hammer zerfetzt ${heros.colorName}${heros.name}'s${resetColor} verbleibende Rüstung!")
+                println("Und zieht bei ${heros.colorName}${heros.name}${resetColor} $damageWOarmor Lebenspunkte ab!")
+                println()
+            // Im Falle von zu niedigrigen Lebenspunkten wird der Gegner aus der KampfListe genommen
+            } else {
+                heros.lp = 0
+                println("${this.colorName}${this.name}${resetColor} hat ${attack.name} angewand und damit ${heros.colorName}${heros.name}${resetColor} besiegt")
+                println("${heros.colorName}${heros.name}${resetColor} ist besiegt!")
+                heroes.remove(heros)
+                deadHeros.add(heros)
+                println()
+            }
+        }
+    }
+
 }
+
