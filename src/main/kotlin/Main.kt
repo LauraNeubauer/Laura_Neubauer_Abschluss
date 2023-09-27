@@ -292,8 +292,8 @@ fun fightHeros() {
 
                             // -----> 2
                             if (inFight.contains(korath) && inFight.contains(bossRonan)) {
-                                if (hero == listHeros[4] && (attackChoice == 3)) {
-                                    listHeros[4].doubleAttack(inFight, hero.attacks[attackChoice], deadEnemy, inFight)
+                                if (hero == peter && (attackChoice == 3)) {
+                                    hero.doubleAttack(inFight, hero.attacks[attackChoice], deadEnemy, inFight)
                                 } else {
                                     // auswahl des Gegners wird gegeben
                                     printEnemys(inFight)
@@ -303,7 +303,7 @@ fun fightHeros() {
                                         try {
                                             chosenEnemy = readln().toInt()
                                             if (chosenEnemy in 0..1) {
-                                                if (hero == listHeros[3] && (attackChoice == 2)) {
+                                                if (hero == groot && (attackChoice == 2)) {
                                                     groot.armorDestroy(inFight[chosenEnemy])
                                                 } else {
                                                     hero.attackEnemy(

@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="14.5">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/colors/Colors.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/colors/Colors.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/enemy/Enemy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/enemy/Enemy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/Hero.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/Hero.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroDraxAndGamora.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroDraxAndGamora.kt" afterDir="false" />
+    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="15">
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroGroot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroGroot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/heros/HeroPeter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/heros/HeroPeter.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695754333607</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="15">
+      <option name="closed" value="true" />
+      <created>1695822621511</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1695822621511</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,6 +351,7 @@
     <MESSAGE value="14.3" />
     <MESSAGE value="14.4" />
     <MESSAGE value="14.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="14.5" />
+    <MESSAGE value="15" />
+    <option name="LAST_COMMIT_MESSAGE" value="15" />
   </component>
 </project>
