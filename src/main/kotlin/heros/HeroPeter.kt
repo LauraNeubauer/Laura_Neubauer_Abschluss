@@ -29,7 +29,7 @@ class HeroPeter(
         if (!enemy.wasDistracted){
             println("${enemy.colorName}${enemy.name}$resetColor ist abgelenkt und greift nicht an!")
         } else {
-            println("${enemy.colorName}${enemy.name}$resetColor ifällt darauf nicht nochmal herein!")
+            println("${enemy.colorName}${enemy.name}$resetColor fällt darauf nicht nochmal herein!")
         }
         println()
     }
