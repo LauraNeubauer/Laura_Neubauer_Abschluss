@@ -127,7 +127,7 @@ var deadEnemy: MutableList<Enemy> = mutableListOf()
 // Attacken-Liste für den Helden
 
 var bossRonan: EnemyBossRonan =
-    EnemyBossRonan("Ronan the Accuser", 12000, 3500, 2500, attacksBossRonan,
+    EnemyBossRonan("Ronan the Accuser", 12000, 5500, 2500, attacksBossRonan,
         korathInFight = false,
         korathAlive = true,
         inFight = inFight,
