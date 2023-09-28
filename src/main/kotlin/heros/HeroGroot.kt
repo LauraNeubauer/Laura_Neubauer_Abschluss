@@ -33,7 +33,7 @@ class HeroGroot(
         } else if (enemy.armorReduction <= 50 && this.lp >= 110) {
             println("${enemy.colorName}${enemy.name}${resetColor} hat keine Rüstung zum zerstören...")
             println("${this.colorName}${this.name}${resetColor} verletzt sich selbst...")
-            this.lp -= 100
+            this.lp -= this.attacks[2].damage!!
             println("${this.colorName}${this.name}'s${resetColor} Lebenspunkte sinken um 100.. auf ${this.lp}")
             println()
         } else if (enemy.armorReduction <= 50 && this.lp <= 100){

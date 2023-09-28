@@ -37,12 +37,15 @@ open class Enemy(
         println()
         for (hero in heroes) {
             val damage: Int = this.attacks[0].damage!!
-            println("${this.colorName}${this.name}${resetColor} hat ${hero.colorName}${hero.name}${resetColor} um 300 Lebenspunkte verletzt!!")
-            println("${hero.colorName}${hero.name}${resetColor} hat noch ${hero.lp} Lebenspunkte")
             if (hero.lp < damage) {
+                println("${this.colorName}${this.name}${resetColor} hat ${hero.colorName}${hero.name}${resetColor} um 300 Lebenspunkte verletzt!!")
+                println("${hero.colorName}${hero.name}${resetColor} hat das nicht verkraftet und ist gestorben!")
+                hero.lp = 0
                 heroes.remove(hero)
                 deadHeros.add(hero)
             } else {
+                println("${this.colorName}${this.name}${resetColor} hat ${hero.colorName}${hero.name}${resetColor} um 300 Lebenspunkte verletzt!!")
+                println("${hero.colorName}${hero.name}${resetColor} hat noch ${hero.lp} Lebenspunkte")
                 hero.lp -= damage
             }
         }
