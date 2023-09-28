@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="16.1">
+    <list default="true" id="fd0c171f-c12b-40d9-817e-ed5c3e303d85" name="Changes" comment="16.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -371,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695886893046</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="16.2">
+      <option name="closed" value="true" />
+      <created>1695890875231</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1695890875231</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -386,7 +394,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="3.0" />
     <MESSAGE value="4.0" />
     <MESSAGE value="5.0" />
     <MESSAGE value="6.0" />
@@ -411,6 +418,7 @@
     <MESSAGE value="15.3" />
     <MESSAGE value="16.0" />
     <MESSAGE value="16.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="16.1" />
+    <MESSAGE value="16.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="16.2" />
   </component>
 </project>
