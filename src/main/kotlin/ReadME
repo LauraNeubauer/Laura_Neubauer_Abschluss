@@ -88,27 +88,20 @@ Eigene Projekte sind nur in Absprache mit dem Dozent erlaubt!
 // Guardians of the Galaxy
 // Team : Peter Quill (Star-Lord), Gamora, Drax der Zerstörer, Rocket, Groot
 
-// Taktiker                 // Peter Quill (Star-Lord) : Blast / Ablenken / Jet-Pack / Doppelschuss
-//                             800 ( 2300 Rüstung / Schnelligkeit : 140 % / Schwäche : Nahkampf )
-// Nahkämpfer               // Gamora : Tritt / Kampfkunstattacke / Wurfwaffe / Kombikampf
-//                             3200 ( 400 Rüstung / Schnelligkeit : 135 % / Schwäche : Taktiker )
-// Nahkämpfer               // Drax : Hieb / Messerattacke / Tritt / Spürsinn
-//                             4500 ( 550 Rüstung / Schnelligkeit : 100 % / Schwäche : Taktiker )
-// Ingenieur                // Rocket : Präzisionsschüsse / Hacking / Modifizierung / Bombe
-//                             400  ( 1400 Rüstung / Schnelligkeit : 145 % / Schwäche : Nahkampf )
-// Plantoid                 // Groot : Formwandel / Schutz / Heilung-der-Natur / Pfeile
-//                             5000 ( 5000 Rüstung / Schnelligkeit : 80 % / Schwäche : Nahkämpfer )
+//                // Peter Quill (Star-Lord) : Blast / Ablenken / Jet-Pack / Doppelschuss
+//                             800 ( 2300 Rüstung / Schnelligkeit : 140 % )
+//                // Gamora : Tritt / Kampfkunstattacke / Wurfwaffe / Kombikampf
+//                             3200 ( 400 Rüstung / Schnelligkeit : 135 % )
+//                // Drax : Hieb / Messerattacke / Tritt / Spürsinn
+//                             4500 ( 550 Rüstung / Schnelligkeit : 100 % )
+//                // Rocket : Präzisionsschüsse / Hacking / Modifizierung / Bombe
+//                             400  ( 1400 Rüstung / Schnelligkeit : 145 % )
+//                // Groot : Formwandel / Schutz / Heilung-der-Natur / Pfeile
+//                             5000 ( 5000 Rüstung / Schnelligkeit : 80 % )
 
 
-//  5 x Groot's Vitaltrank : Alle Kategorien : heilt um die Hälfte seiner Lebenspunkte
-//  1 x Elementar Kristalle : Alle Kategorien : erhöhen den Schadenswert für einen Helden dauerhaft um 10%
-
-/*
-Sakaarans: Die Sakaarans sind die ersten Gegner, denen die Guardians begegnen.
-Sie kämpfen gegen die Guardians während des Angriffs auf Morag, als Star-Lord den Orb stiehlt.
-
-Nebula: Nebula ist die Adoptivtochter von Thanos und arbeitet für Ronan.
-Sie tritt mehrmals gegen Gamora und die Guardians an.
+//           5 x Groot's Vitaltrank : heilt um die Hälfte seiner Lebenspunkte
+//           5 x Gamoras Upgradekit : Erhöht den Schadenswert aller Angriffe für einen Helden dauerhaft um 10%
 
 Ronan the Accuser: Ronan ist der Hauptantagonist des Films und die größte Bedrohung.
 Er ist ein Kree-Fanatiker und derjenige, der den Orb, der den Infinity-Stein enthält,
@@ -117,7 +110,7 @@ Korath the Pursuer: Korath ist ein Söldner im Dienst von Ronan und tritt gegen 
 als sie auf Xandar auf Ronan treffen.
 */
 
-// Übernatürlicher            // Ronan the Accuser : Hammer-Schock-Welle / Packen / Korath the Pursuer wird gerufen / Tritt / Hammerhieb / Schuss
-//                             3500 ( 2500 Rüstung / Schnelligkeit : 120 % / Schwäche : Taktiker )
-// Taktiker                 // Korath the Pursuer : Schuss / Doppelschuss / Tritt / Heilungsblitz
-//                             1000 ( 1500 Rüstung / Schnelligkeit : 110 % / Schwäche : Nahkampf )
+//            // Ronan the Accuser : Hammer-Schock-Welle / Packen / Korath the Pursuer wird gerufen / Tritt / Hammer-Blast / Hammerhieb / Schuss
+//                             3500 ( 2500 Rüstung / Schnelligkeit : 120 % )
+//            // Korath the Pursuer : Schuss / Doppelschuss / Tritt / Heilungsblitz
+//                             1000 ( 1500 Rüstung / Schnelligkeit : 110 % )
