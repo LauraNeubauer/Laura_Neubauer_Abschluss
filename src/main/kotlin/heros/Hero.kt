@@ -144,13 +144,13 @@ open class Hero(
             if (enemy.armorReduction >= armorDamage) {
                 enemy.armorReduction -= armorDamage
                 enemy.lp -= damage
-                println("Die Kugel zerstört $armorDamage Rüstungspunkte!")
+                println("Die Kugel zerstört ${enemy.colorName}${enemy.name}'s${resetColor} $armorDamage Rüstungspunkte!")
                 println("Und zieht ${attack.damage} Lebenspunkte ab!")
                 println()
             } else if (enemy.lp > damage) {
                 enemy.armorReduction = 0
                 enemy.lp -= damageWOarmor
-                println("Die Kugel zerstört die verbleibende Rüstung!")
+                println("Die Kugel zerstört ${enemy.colorName}${enemy.name}'s${resetColor} verbleibende Rüstung!")
                 println("Und zieht $damageWOarmor Lebenspunkte ab!")
                 println()
             // Im Falle von zu niedigrigen Lebenspunkten wird der Gegner aus der KampfListe genommen
